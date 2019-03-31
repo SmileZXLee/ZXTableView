@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ZXTestHFHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tb_header_bac" translatesAutoresizingMaskIntoConstraints="NO" id="lSx-te-jUB">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lom-3m-Sho">
+                    <rect key="frame" x="20" y="16" width="374" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="lSx-te-jUB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PwG-7k-If6"/>
+                <constraint firstItem="lom-3m-Sho" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="TKj-cr-CF6"/>
+                <constraint firstAttribute="bottom" secondItem="lSx-te-jUB" secondAttribute="bottom" id="Z2m-aP-40C"/>
+                <constraint firstAttribute="trailing" secondItem="lSx-te-jUB" secondAttribute="trailing" id="gpv-RM-4yY"/>
+                <constraint firstItem="lom-3m-Sho" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="pRl-Mf-8F0"/>
+                <constraint firstAttribute="trailing" secondItem="lom-3m-Sho" secondAttribute="trailing" constant="20" id="uVI-X9-4tB"/>
+                <constraint firstItem="lSx-te-jUB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="w4O-fy-pZD"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="headerLabel" destination="lom-3m-Sho" id="Sgh-en-P3v"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="tb_header_bac" width="800" height="233"/>
+    </resources>
+</document>
