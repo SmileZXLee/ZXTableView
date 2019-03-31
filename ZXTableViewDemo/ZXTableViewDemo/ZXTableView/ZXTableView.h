@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface ZXTableView : UITableView
 #pragma mark - 数据设置
 ///设置所有数据数组
 @property(nonatomic, strong)NSMutableArray *zxDatas;
-///设置对应cell的类
+///声明cell的类
 @property (nonatomic, copy) Class (^zx_setCellClassAtIndexPath)(NSIndexPath *indexPath);
-///设置对应cell的高度(非必须，若设置了，则内部的自动计算高度无效)
+///设置cell的高度(非必须，若设置了，则内部的自动计算高度无效)
 @property (nonatomic, copy) CGFloat (^zx_setCellHAtIndexPath)(NSIndexPath *indexPath);
 ///设置section数量(非必须，若设置了，则内部自动设置section个数无效)
 @property (nonatomic, copy) CGFloat (^zx_setNumberOfSectionsInTableView)(UITableView *tableView);
@@ -46,6 +45,13 @@
 @property (nonatomic, copy) void (^zx_getHeaderViewInSection)(NSUInteger section,id headerView,NSMutableArray *secArr);
 ///获取对应section的footerView，把id改成对应类名即可无需强制转换，secArr为对应section的model数组
 @property (nonatomic, copy) void (^zx_getFooterViewInSection)(NSUInteger section,id footerView,NSMutableArray *secArr);
+#pragma mark - 快速构建
+///声明cell的类并返回cell对象
+-(void)zx_setCellClassAtIndexPath:(Class (^)(NSIndexPath * indexPath)) setCellClassCallBack returnCell:(void (^)(NSIndexPath * indexPath,id cell,id model))returnCellCallBack;
+///声明HeaderView的类并返回HeaderView对象
+-(void)zx_setHeaderClassInSection:(Class (^)(NSInteger)) setHeaderClassCallBack returnHeader:(void (^)(NSUInteger section,id headerView,NSMutableArray *secArr))returnHeaderCallBack;
+///声明FooterView的类并返回FooterView对象
+-(void)zx_setFooterClassInSection:(Class (^)(NSInteger)) setFooterClassCallBack returnHeader:(void (^)(NSUInteger section,id headerView,NSMutableArray *secArr))returnFooterCallBack;
 #pragma mark - 代理事件相关
 ///选中某一行，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^zx_didSelectedAtIndexPath)(NSIndexPath *indexPath,id model,id cell);

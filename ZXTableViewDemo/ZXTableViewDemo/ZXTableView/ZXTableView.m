@@ -345,6 +345,25 @@
     }
     self.zxDatas = datasArr;
 }
+
+#pragma mark - 快速构建
+#pragma mark 声明cell的类并返回cell对象
+-(void)zx_setCellClassAtIndexPath:(Class (^)(NSIndexPath * indexPath)) setCellClassCallBack returnCell:(void (^)(NSIndexPath * indexPath,id cell,id model))returnCellCallBack{
+    self.zx_setCellClassAtIndexPath = setCellClassCallBack;
+    self.zx_getCellAtIndexPath = returnCellCallBack;
+}
+
+#pragma mark 声明HeaderView的类并返回HeaderView对象
+-(void)zx_setHeaderClassInSection:(Class (^)(NSInteger)) setHeaderClassCallBack returnHeader:(void (^)(NSUInteger section,id headerView,NSMutableArray *secArr))returnHeaderCallBack{
+    self.zx_setHeaderClassInSection = setHeaderClassCallBack;
+    self.zx_getHeaderViewInSection = returnHeaderCallBack;
+}
+
+#pragma mark 声明FooterView的类并返回FooterView对象
+-(void)zx_setFooterClassInSection:(Class (^)(NSInteger)) setFooterClassCallBack returnHeader:(void (^)(NSUInteger section,id headerView,NSMutableArray *secArr))returnFooterCallBack{
+    self.zx_setFooterClassInSection = setFooterClassCallBack;
+    self.zx_getFooterViewInSection = returnFooterCallBack;
+}
 #pragma mark - Private
 #pragma mark 判断是否是多个section的情况
 -(BOOL)isMultiDatas{
