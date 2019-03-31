@@ -37,7 +37,7 @@
 @property(nonatomic, assign)BOOL zx_showHeaderWhenNoMsg;
 ///无数据是否显示FooterView，默认为YES
 @property(nonatomic, assign)BOOL zx_showFooterWhenNoMsg;
-///设置tableView的style，UITableViewStyleGrouped可禁止HeaderView与FooterView自动吸附
+
 #pragma mark - 数据获取
 ///获取对应行的cell，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^zx_getCellAtIndexPath)(NSIndexPath *indexPath,id cell,id model);
@@ -60,7 +60,7 @@
 ///滑动删除
 @property (nonatomic, copy) NSArray<UITableViewRowAction *>* (^zx_editActionsForRowAtIndexPath)(NSIndexPath *indexPath);
 ///cell将要展示，把id改成对应类名即可无需强制转换
-@property (nonatomic, copy) void (^willDisplayCell)(NSIndexPath *indexPath,id cell);
+@property (nonatomic, copy) void (^zx_willDisplayCell)(NSIndexPath *indexPath,id cell);
 ///scrollView滚动事件
 @property (nonatomic, copy) void (^zx_scrollViewDidScroll)(UIScrollView *scrollView);
 ///scrollView缩放事件

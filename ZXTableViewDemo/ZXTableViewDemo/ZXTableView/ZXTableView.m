@@ -178,7 +178,7 @@
 }
 #pragma mark tableView cell 将要展示
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    !self.willDisplayCell ? : self.willDisplayCell(indexPath,cell);
+    !self.zx_willDisplayCell ? : self.zx_willDisplayCell(indexPath,cell);
 }
 #pragma mark tableView HeaderView & FooterView
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{

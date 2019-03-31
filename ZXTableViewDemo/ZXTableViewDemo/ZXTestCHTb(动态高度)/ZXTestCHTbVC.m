@@ -25,11 +25,11 @@
 
 #pragma mark 设置TableView
 -(void)setTableView{
-    //设置cell是什么类
+    //声明cell是什么类
     self.tableView.zx_setCellClassAtIndexPath = ^Class (NSIndexPath *  indexPath) {
         return [ZXTestCHTbCell class];
     };
-    //设置HeaderView是什么类
+    //声明HeaderView是什么类
     self.tableView.zx_setHeaderClassInSection = ^Class(NSInteger section) {
         return [ZXTestCHTbSpaceHeader class];
     };

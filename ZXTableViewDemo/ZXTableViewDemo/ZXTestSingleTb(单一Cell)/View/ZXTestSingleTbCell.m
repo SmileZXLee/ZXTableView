@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *goodAtLabel;
 @property (weak, nonatomic) IBOutlet UIButton *delBtn;
-
+//若cell中有包含model的属性，则会自动将model赋值给它
 @property (strong,nonatomic) ZXTestSingleTbModel *sTbModel;
 
 @end

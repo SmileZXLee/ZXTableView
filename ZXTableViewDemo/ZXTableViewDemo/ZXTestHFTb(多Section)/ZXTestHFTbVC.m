@@ -26,15 +26,15 @@
 
 #pragma mark 设置TableView
 -(void)setTableView{
-    //设置cell是什么类
+    //声明cell是什么类
     self.tableView.zx_setCellClassAtIndexPath = ^Class (NSIndexPath *  indexPath) {
         return [ZXTestSingleTbCell class];
     };
-    //设置HeaderView是什么类
+    //声明HeaderView是什么类
     self.tableView.zx_setHeaderClassInSection = ^Class(NSInteger section) {
         return [ZXTestHFHeaderView class];
     };
-    //设置FooterView是什么类
+    //声明FooterView是什么类
     self.tableView.zx_setFooterClassInSection = ^Class(NSInteger section) {
         return [ZXTestHFFooterView class];
     };
