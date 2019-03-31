@@ -48,7 +48,7 @@
     };
     //设置cell的高度（非必须）
     self.tableView.zx_setCellHAtIndexPath = ^CGFloat(NSIndexPath *indexPath) {
-        return 70;
+        return 60;
     };
 }
 
