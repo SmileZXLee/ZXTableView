@@ -7,6 +7,6 @@ s.license      = 'MIT'
 s.authors      = {'李兆祥' => '393727164@qq.com'}
 s.platform     = :ios, '8.0'
 s.source       = {:git => 'https://github.com/SmileZXLee/ZXTableView.git', :tag => s.version}
-s.source_files = 'ZXTableViewDemo/ZXTableViewDemo/ZXTableView/**/*'
+s.source_files = 'ZXTableView/**/*'
 s.requires_arc = true
 end
