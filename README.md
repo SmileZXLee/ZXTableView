@@ -302,6 +302,19 @@ self.height = 100;
 ```
 ***
 
+### 在cell或model中获取当前的indexPath
+* 在cell中获取当前的indexPath
+```objective-c
+//在Cell.h或Cell.m中定义属性indexPath即可
+@property (strong, nonatomic) NSIndexPath *indexPath;
+```
+* 在model中获取当前的indexPath
+```objective-c
+//在Model.h或Model.m中定义属性indexPath即可
+@property (strong, nonatomic) NSIndexPath *indexPath;
+```
+***
+
 ### ZXTableViewConfig
 ```objective-c
 ///model默认去匹配的cell高度属性名 若不存在则动态生成cellHRunTime的属性名
@@ -323,6 +336,9 @@ static BOOL const DisableAutomaticDimension = YES;
 ///分割线样式，默认为UITableViewCellSeparatorStyleNone
 static BOOL const DefaultSeparatorStyle =  UITableViewCellSeparatorStyleNone;
 ```
+***
+
+## 感谢使用，有任何问题欢迎随时issue我
 
 
 
