@@ -1,4 +1,16 @@
 # ZXTableView
+## 安装
+### 通过CocoaPods安装
+```ruby
+pod 'ZXTableView'
+```
+### 手动导入
+* 将ZXTableView拖入项目中。
+
+### 导入头文件
+```objective-c
+#import "ZXTableView.h"
+```
 ## 创建ZXTableView示例
 ### 创建一个最基础的TableView，实现点击删除按钮删除对应行
 * 在TableView所在的控制器中，此处定义的cell对应模型为ZXTestSingleTbModel
@@ -290,6 +302,19 @@ self.height = 100;
 ```
 ***
 
+### 在cell或model中获取当前的indexPath
+* 在cell中获取当前的indexPath
+```objective-c
+//在Cell.h或Cell.m中定义属性indexPath即可
+@property (strong, nonatomic) NSIndexPath *indexPath;
+```
+* 在model中获取当前的indexPath
+```objective-c
+//在Model.h或Model.m中定义属性indexPath即可
+@property (strong, nonatomic) NSIndexPath *indexPath;
+```
+***
+
 ### ZXTableViewConfig
 ```objective-c
 ///model默认去匹配的cell高度属性名 若不存在则动态生成cellHRunTime的属性名
@@ -311,6 +336,9 @@ static BOOL const DisableAutomaticDimension = YES;
 ///分割线样式，默认为UITableViewCellSeparatorStyleNone
 static BOOL const DefaultSeparatorStyle =  UITableViewCellSeparatorStyleNone;
 ```
+***
+
+## 感谢使用，有任何问题欢迎随时issue我
 
 
 
