@@ -1,4 +1,16 @@
 # ZXTableView
+## 安装
+### 通过CocoaPods安装
+```ruby
+pod 'ZXTableView'
+```
+### 手动导入
+* 将ZXTableView拖入项目中。
+
+### 导入头文件
+```objective-c
+#import "ZXTableView.h"
+```
 ## 创建ZXTableView示例
 ### 创建一个最基础的TableView，实现点击删除按钮删除对应行
 * 在TableView所在的控制器中，此处定义的cell对应模型为ZXTestSingleTbModel
