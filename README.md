@@ -251,7 +251,7 @@ self.tableView.zx_showFooterWhenNoMsg = YES;
 @property (nonatomic, copy) void (^zx_scrollViewDidEndDragging)(UIScrollView *scrollView, BOOL willDecelerate);
 ```
 * tableView重写数据源与代理
-```
+```objective-c
 //tableView的DataSource 设置为当前控制器即可重写对应数据源方法
 @property (nonatomic, weak, nullable) id <UITableViewDataSource> zxDataSource;
 //tableView的Delegate 设置为当前控制器即可重写对应代理方法
