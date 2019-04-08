@@ -39,7 +39,7 @@ self.tableView.zxDatas = dataArr;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *goodAtLabel;
 @property (weak, nonatomic) IBOutlet UIButton *delBtn;
-//若cell中有包含model的属性，则会自动将model赋值给它
+//若cell中有包含model的属性，则会自动将model赋值给它(如果有多个含有model字符串的属性，则赋值给第一个)
 @property (strong,nonatomic) ZXTestSingleTbModel *sTbModel;
 @end
 
@@ -251,7 +251,7 @@ self.tableView.zx_showFooterWhenNoMsg = YES;
 @property (nonatomic, copy) void (^zx_scrollViewDidEndDragging)(UIScrollView *scrollView, BOOL willDecelerate);
 ```
 * tableView重写数据源与代理
-```
+```objective-c
 //tableView的DataSource 设置为当前控制器即可重写对应数据源方法
 @property (nonatomic, weak, nullable) id <UITableViewDataSource> zxDataSource;
 //tableView的Delegate 设置为当前控制器即可重写对应代理方法
