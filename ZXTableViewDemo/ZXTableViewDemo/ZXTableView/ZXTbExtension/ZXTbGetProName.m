@@ -25,7 +25,7 @@
     NSMutableDictionary *cacheMapper = [ZXTbGetProName shareInstance].proCacheMapper;
     NSString *objCls = NSStringFromClass([obj class]);
     if([cacheMapper.allKeys containsObject:objCls]){
-        return cacheMapper[objCls];
+        return [cacheMapper[objCls] mutableCopy];
     }
     NSMutableArray *propertyNamesArr = [NSMutableArray array];
     u_int count;
@@ -36,8 +36,8 @@
         [propertyNamesArr addObject:propertyNameStr];
         
     }
-    [cacheMapper setValue:propertyNamesArr forKey:objCls];
-    return propertyNamesArr;
+    [cacheMapper setValue:[propertyNamesArr mutableCopy] forKey:objCls];
+    return propertyNamesArr ;
 }
 +(NSMutableArray *)zx_getRecursionPropertyNames:(id)obj{
     NSMutableArray *propertyNamesArr = [self zx_getPropertyNames:obj];
@@ -45,11 +45,8 @@
     Class class = [obj superclass];
     while (true) {
         if(![self isSysClass:[class new]]){
-            NSMutableArray *superclassproArr = [self zx_getPropertyNames:obj];
-            for (NSString *superclassproStr in superclassproArr) {
-                [propertyNamesArr addObject:superclassproStr];
-            }
-            
+            NSMutableArray *superclassproArr = [self zx_getPropertyNames:class];
+            [propertyNamesArr addObjectsFromArray:superclassproArr];
         }else{
             break;
         }
