@@ -208,6 +208,20 @@ self.tableView.zx_setHeaderHInSection = ^CGFloat(NSInteger section) {
     return 100;
 };
 ```
+* 滑动编辑
+```objective-c
+self.tableView.zx_editActionsForRowAtIndexPath = ^NSArray<UITableViewRowAction *> *(NSIndexPath *indexPath) {
+        UITableViewRowAction *delAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+            [weakSelf.tableView.zxDatas removeObjectAtIndex:indexPath.row];
+            [weakSelf.tableView reloadData];
+        }];
+        //第0行不显示侧滑删除，其余行显示侧滑删除，这里只是为了演示控制侧滑删除行的情况
+        if(indexPath.row == 0){
+            return nil;
+        }
+        return @[delAction];
+    };
+```
 ### tableView代理事件&偏好设置相关
 * 点击了某一行cell
 ```objective-c
