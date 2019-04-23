@@ -57,7 +57,7 @@
 @property (nonatomic, copy) void (^zx_didSelectedAtIndexPath)(NSIndexPath *indexPath,id model,id cell);
 ///取消选中某一行，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^zx_didDeselectedAtIndexPath)(NSIndexPath *indexPath,id model,id cell);
-///滑动删除
+///滑动编辑
 @property (nonatomic, copy) NSArray<UITableViewRowAction *>* (^zx_editActionsForRowAtIndexPath)(NSIndexPath *indexPath);
 ///cell将要展示，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^zx_willDisplayCell)(NSIndexPath *indexPath,id cell);

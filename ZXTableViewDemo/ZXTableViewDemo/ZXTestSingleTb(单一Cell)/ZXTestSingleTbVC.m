@@ -29,6 +29,7 @@
     [self.tableView zx_setCellClassAtIndexPath:^Class(NSIndexPath *indexPath) {
         return [ZXTestSingleTbCell class];
     } returnCell:^(NSIndexPath *indexPath, ZXTestSingleTbCell *cell, id model) {
+        //点击删除按钮删除
         cell.delBlock = ^{
             [weakSelf.tableView.zxDatas removeObjectAtIndex:indexPath.row];
             [weakSelf.tableView reloadData];
@@ -54,6 +55,18 @@
     CGFloat sizeScale = [UIScreen mainScreen].bounds.size.width / 375;
     self.tableView.zx_setCellHAtIndexPath = ^CGFloat(NSIndexPath *indexPath) {
         return 70 * sizeScale;
+    };
+    
+    self.tableView.zx_editActionsForRowAtIndexPath = ^NSArray<UITableViewRowAction *> *(NSIndexPath *indexPath) {
+        UITableViewRowAction *delAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+            [weakSelf.tableView.zxDatas removeObjectAtIndex:indexPath.row];
+            [weakSelf.tableView reloadData];
+        }];
+        //第0行不显示侧滑删除，其余行显示侧滑删除，这里只是为了演示控制侧滑删除行的情况
+        if(indexPath.row == 0){
+            return nil;
+        }
+        return @[delAction];
     };
     
 }

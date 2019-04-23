@@ -137,7 +137,7 @@
         !self.zx_didDeselectedAtIndexPath ? : self.zx_didDeselectedAtIndexPath(indexPath,model,cell);
     }
 }
-#pragma mark tableView 滑动删除
+#pragma mark tableView 滑动编辑
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(self.zx_editActionsForRowAtIndexPath){
         return self.zx_editActionsForRowAtIndexPath(indexPath);
@@ -147,7 +147,13 @@
 }
 #pragma mark tableView 是否可以编辑
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    return self.zx_editActionsForRowAtIndexPath ? YES : NO;
+    if(self.zx_editActionsForRowAtIndexPath){
+        NSArray *rowActionsArr = self.zx_editActionsForRowAtIndexPath(indexPath);
+        if(rowActionsArr && ![rowActionsArr isKindOfClass:[NSNull class]] && rowActionsArr.count){
+            return YES;
+        }
+    }
+    return NO;
 }
 #pragma mark tableView cell高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
