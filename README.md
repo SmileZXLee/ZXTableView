@@ -290,7 +290,8 @@ self.tableView.zx_setCellHAtIndexPath = ^CGFloat(NSIndexPath *indexPath) {
 //在cell的初始化方法中设置cell高度即可
 self.height = 50;
 ```
-* 在model中设置cell的高度（优先级第二，若设置，则在cell中设置cell的高度无效）
+* 在model中设置cell的高度（优先级第二，若设置，则在cell中设置cell的高度无效）  
+
 在model.h中
 
 ```objective-c
