@@ -279,18 +279,19 @@ self.tableView.zx_showFooterWhenNoMsg = YES;
 
 ## Other
 ### 设置cell高度的几种方式
-* 在控制器中设置cell高度，可根据indexPath设置不同的cell高度
+* 在控制器中设置cell高度，可根据indexPath设置不同的cell高度（优先级最高，若设置了，其他高度设置方法均无效）
 ```objective-c
 self.tableView.zx_setCellHAtIndexPath = ^CGFloat(NSIndexPath *indexPath) {
     return 70;
 };
 ```
-* 在cell中设置cell的高度
+* 在cell中设置cell的高度（优先级最低）
 ```objective-c
 //在cell的初始化方法中设置cell高度即可
 self.height = 50;
 ```
-* 在model中设置cell的高度
+* 在model中设置cell的高度（优先级第二，若设置，则在cell中设置cell的高度无效）  
+
 在model.h中
 
 ```objective-c
