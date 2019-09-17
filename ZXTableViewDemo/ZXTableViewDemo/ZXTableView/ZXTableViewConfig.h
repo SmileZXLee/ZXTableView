@@ -15,6 +15,8 @@ static NSString *const CELLH = @"cellH";
 static NSString *const DATAMODEL = @"model";
 ///model与cell的index属性，存储当前model与cell所属的indexPath
 static NSString *const INDEX = @"indexPath";
+///headerView与footerView的section属性，存储当前headerView与footerView所属的section
+static NSString *const SECTION = @"section";
 ///若ZXBaseTableView无法自动获取cell高度（zxdata有值即可），且用户未自定义高度，则使用默认高度
 static CGFloat const CELLDEFAULTH = 44;
 
@@ -23,6 +25,10 @@ static CGFloat const CELLDEFAULTH = 44;
 static BOOL const ShowHeaderWhenNoMsg = YES;
 ///无数据是否显示FooterView，默认为YES
 static BOOL const ShowFooterWhenNoMsg = YES;
+///保持headerView不变（仅初始化一次），默认为NO
+static BOOL const KeepStaticHeaderView = NO;
+///保持footerView不变（仅初始化一次），默认为NO
+static BOOL const KeepStaticFooterView = NO;
 ///禁止系统Cell自动高度 可以有效解决tableView跳动问题，默认为YES
 static BOOL const DisableAutomaticDimension = YES;
 ///分割线样式，默认为UITableViewCellSeparatorStyleNone

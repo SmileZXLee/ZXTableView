@@ -7,6 +7,7 @@
 //  https://github.com/SmileZXLee/ZXTableView
 
 #import <UIKit/UIKit.h>
+NS_ASSUME_NONNULL_BEGIN
 @interface ZXTableView : UITableView
 #pragma mark - 数据设置
 ///设置所有数据数组
@@ -37,7 +38,10 @@
 @property(nonatomic, assign)BOOL zx_showHeaderWhenNoMsg;
 ///无数据是否显示FooterView，默认为YES
 @property(nonatomic, assign)BOOL zx_showFooterWhenNoMsg;
-
+///保持headerView不变（仅初始化一次），默认为NO
+@property(nonatomic, assign)BOOL zx_keepStaticHeaderView;
+///保持footerView不变（仅初始化一次），默认为NO
+@property(nonatomic, assign)BOOL zx_keepStaticFooterView;
 #pragma mark - 数据获取
 ///获取对应行的cell，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^zx_getCellAtIndexPath)(NSIndexPath *indexPath,id cell,id model);
@@ -49,9 +53,9 @@
 ///声明cell的类并返回cell对象
 -(void)zx_setCellClassAtIndexPath:(Class (^)(NSIndexPath * indexPath)) setCellClassCallBack returnCell:(void (^)(NSIndexPath * indexPath,id cell,id model))returnCellCallBack;
 ///声明HeaderView的类并返回HeaderView对象
--(void)zx_setHeaderClassInSection:(Class (^)(NSInteger)) setHeaderClassCallBack returnHeader:(void (^)(NSUInteger section,id headerView,NSMutableArray *secArr))returnHeaderCallBack;
+-(void)zx_setHeaderClassInSection:(Class (^)(NSInteger section)) setHeaderClassCallBack returnHeader:(void (^)(NSUInteger section,id headerView,NSMutableArray *secArr))returnHeaderCallBack;
 ///声明FooterView的类并返回FooterView对象
--(void)zx_setFooterClassInSection:(Class (^)(NSInteger)) setFooterClassCallBack returnHeader:(void (^)(NSUInteger section,id headerView,NSMutableArray *secArr))returnFooterCallBack;
+-(void)zx_setFooterClassInSection:(Class (^)(NSInteger section)) setFooterClassCallBack returnHeader:(void (^)(NSUInteger section,id headerView,NSMutableArray *secArr))returnFooterCallBack;
 #pragma mark - 代理事件相关
 ///选中某一行，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^zx_didSelectedAtIndexPath)(NSIndexPath *indexPath,id model,id cell);
@@ -77,4 +81,4 @@
 ///tableView的Delegate 设置为当前控制器即可重写对应代理方法
 @property (nonatomic, weak, nullable) id <UITableViewDelegate> zxDelegate;
 @end
-
+NS_ASSUME_NONNULL_END

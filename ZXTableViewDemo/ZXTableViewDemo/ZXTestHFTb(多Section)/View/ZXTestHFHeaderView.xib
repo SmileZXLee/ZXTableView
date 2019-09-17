@@ -39,6 +39,7 @@
             <connections>
                 <outlet property="headerLabel" destination="lom-3m-Sho" id="Sgh-en-P3v"/>
             </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="91.741071428571431"/>
         </view>
     </objects>
     <resources>

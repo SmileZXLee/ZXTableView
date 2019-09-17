@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZXTestHFHeaderView : UIView
 @property (weak, nonatomic) IBOutlet UILabel *headerLabel;
-
+@property (strong, nonatomic)NSNumber *section;
 @end
 
 NS_ASSUME_NONNULL_END

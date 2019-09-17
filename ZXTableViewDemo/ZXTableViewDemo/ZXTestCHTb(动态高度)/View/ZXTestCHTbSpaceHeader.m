@@ -20,6 +20,7 @@
         sortLabel.textColor = [UIColor colorWithRed:5 / 255.0 green:140 / 255.0 blue:255.0 / 2550 alpha:1];
         sortLabel.text = @"这是一个评论列表";
         self.sortLabel = sortLabel;
+        NSLog(@"这是一个评论列表");
     }
     return self;
 }

@@ -12,7 +12,8 @@
 #import "NSObject+ZXTbSafeValue.h"
 #import "NSObject+ZXTbAddPro.h"
 @interface ZXTableView()<UITableViewDelegate,UITableViewDataSource>
-
+@property(nonatomic, strong)NSMutableDictionary *zx_headerViewCacheDic;
+@property(nonatomic, strong)NSMutableDictionary *zx_footerViewCacheDic;
 @end
 @implementation ZXTableView
 #pragma mark - Perference
@@ -42,7 +43,6 @@
         if(!cell){
             if(isExist){
                 cell = [[[NSBundle mainBundle]loadNibNamed:className owner:nil options:nil]lastObject];
-                [cell setValue:className forKey:@"reuseIdentifier"];
                 [cell zx_safeSetValue:className forKey:@"reuseIdentifier"];
             }else{
                 if(cellClass){
@@ -204,6 +204,7 @@
     }
     NSMutableArray *secArr = self.zxDatas.count ? [self isMultiDatas] ? self.zxDatas[section] : self.zxDatas : nil;
     !self.zx_getHeaderViewInSection ? : self.zx_getHeaderViewInSection(section,headerView,secArr);
+    [headerView zx_safeSetValue:[NSNumber numberWithInteger:section] forKey:SECTION];
     return !secArr.count ? self.zx_showHeaderWhenNoMsg ? headerView : nil : headerView;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
@@ -223,7 +224,8 @@
     }
     NSMutableArray *secArr = self.zxDatas.count ? [self isMultiDatas] ? self.zxDatas[section] : self.zxDatas : nil;
     !self.zx_getFooterViewInSection ? : self.zx_getFooterViewInSection(section,footerView,secArr);
-    return footerView;
+    [footerView zx_safeSetValue:[NSNumber numberWithInteger:section] forKey:SECTION];
+    return !secArr.count ? self.zx_showFooterWhenNoMsg ? footerView : nil : footerView;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if([self.zxDelegate respondsToSelector:@selector(tableView:heightForHeaderInSection:)]){
@@ -406,6 +408,10 @@
 
 #pragma mark 根据section获取headerView
 -(UIView *)getHeaderViewInSection:(NSUInteger)section{
+    NSString *sectionStr = [NSString stringWithFormat:@"%lu",section];
+    if(self.zx_keepStaticHeaderView && [self.zx_headerViewCacheDic.allKeys containsObject:sectionStr]){
+        return self.zx_headerViewCacheDic[sectionStr];
+    }
     Class headerClass = self.zx_setHeaderClassInSection(section);
     BOOL isExist = [self hasNib:NSStringFromClass(headerClass)];
     UIView *headerView = nil;
@@ -414,11 +420,18 @@
     }else{
         headerView = [[headerClass alloc]init];
     }
+    if(self.zx_keepStaticHeaderView){
+        [self.zx_headerViewCacheDic setObject:headerView forKey:sectionStr];
+    }
     return headerView;
 }
 
 #pragma mark 根据section获取footerView
 -(UIView *)getFooterViewInSection:(NSUInteger)section{
+    NSString *sectionStr = [NSString stringWithFormat:@"%lu",section];
+    if(self.zx_keepStaticFooterView && [self.zx_footerViewCacheDic.allKeys containsObject:sectionStr]){
+        return self.zx_footerViewCacheDic[sectionStr];
+    }
     Class footerClass = self.zx_setFooterClassInSection(section);
     BOOL isExist = [self hasNib:NSStringFromClass(footerClass)];
     UIView *footerView = nil;
@@ -426,6 +439,9 @@
         footerView = [[[NSBundle mainBundle]loadNibNamed:NSStringFromClass(footerClass) owner:nil options:nil]lastObject];
     }else{
         footerView = [[footerClass alloc]init];
+    }
+    if(self.zx_keepStaticFooterView){
+        [self.zx_footerViewCacheDic setObject:footerView forKey:sectionStr];
     }
     return footerView;
 }
@@ -461,6 +477,8 @@
     self.zx_disableAutomaticDimension = DisableAutomaticDimension;
     self.zx_showHeaderWhenNoMsg = ShowHeaderWhenNoMsg;
     self.zx_showFooterWhenNoMsg = ShowFooterWhenNoMsg;
+    self.zx_keepStaticHeaderView = KeepStaticHeaderView;
+    self.zx_keepStaticFooterView = KeepStaticFooterView;
 }
 #pragma mark - 生命周期
 -(instancetype)init{
@@ -483,4 +501,30 @@
     self.delegate = nil;
     self.dataSource = nil;
 }
+#pragma mark - Private
+#pragma mark 重写reload方法
+-(void)reloadData{
+    if(!self.zx_keepStaticHeaderView){
+        [self.zx_headerViewCacheDic removeAllObjects];
+    }
+    if(!self.zx_keepStaticFooterView){
+        [self.zx_footerViewCacheDic removeAllObjects];
+    }
+    [super reloadData];
+}
+#pragma mark - 懒加载
+-(NSMutableDictionary *)zx_headerViewCacheDic{
+    if(!_zx_headerViewCacheDic){
+        _zx_headerViewCacheDic = [NSMutableDictionary dictionary];
+    }
+    return _zx_headerViewCacheDic;
+}
+
+-(NSMutableDictionary *)zx_footerViewCacheDic{
+    if(!_zx_footerViewCacheDic){
+        _zx_footerViewCacheDic = [NSMutableDictionary dictionary];
+    }
+    return _zx_footerViewCacheDic;
+}
+
 @end
