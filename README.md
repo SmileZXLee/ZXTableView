@@ -223,7 +223,6 @@ self.height = 50;
     _cellH = cellH + 10;
 }
 ```
-***
 
 #### 在cell或model中获取当前的indexPath
 * 在cell中获取当前的indexPath
@@ -280,7 +279,6 @@ self.tableView.zx_setHeaderHInSection = ^CGFloat(NSInteger section) {
 //在headerView的初始化方法中设置headerView高度即可
 self.height = 100;
 ```
-***
 
 #### 在headerView或footerView中获取当前的section
 * 在headerView中获取当前的section
@@ -288,7 +286,6 @@ self.height = 100;
 //在headerView.h或headerView.m中定义属性section即可
 @property (strong, nonatomic) NSNumber *section;
 ```
-***
 
 #### headerView&footerView属性相关，此处以headerView为例
 * 无数据是否显示HeaderView，默认为YES
