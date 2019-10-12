@@ -154,20 +154,20 @@ self.tableView.zxDatas = dataArr;
 * 创建一个tableView的步骤大致分为，声明cell，声明headerView&footerView，self.tableView.zxDatas赋值，在cell中声明一个含有“model”的属性名，重写该属性的set方法即可。
 * ZXTableView中的大多数方法都是zx_开头，zx_set开头代表设置tableView，例如：zx_setCellClass...即为设置(声明)cell的类是谁；zx_get开头代表从tableView中获取信息，例如zx_getCellAt...即为获取cell对象，可依据此结合下方说明快速记忆。
 ### cell相关
-* 声明cell
+#### 声明cell
 ```objective-c
 self.tableView.zx_setCellClassAtIndexPath = ^Class (NSIndexPath *  indexPath) {
     //可以根据indexPath返回不同的cell
     return [MyCell class];
 };
 ```
-* 获取cell对象，对cell对象进行操作
+#### 获取cell对象，对cell对象进行操作
 ```objective-c
 self.tableView.zx_getCellAtIndexPath = ^(NSIndexPath *indexPath, id cell, id model) {
     //这里的id cell中id可以改成自己当前的cell类名(若只有一种cell)，id model中的id可以改成自己当前模型的类名(若只有一种模型)
 }
 ```
-* 以上声明cell类与获取cell可以写在同一个方法中
+#### 以上声明cell类与获取cell可以写在同一个方法中
 ```objective-c
 [self.tableView zx_setCellClassAtIndexPath:^Class(NSIndexPath *indexPath) {
     return [MyCell class];
@@ -175,14 +175,14 @@ self.tableView.zx_getCellAtIndexPath = ^(NSIndexPath *indexPath, id cell, id mod
     //获取cell对象
 }];
 ```
-* (非必须)设置cell高度
+#### (非必须)设置cell高度
 ```objective-c
 //返回cell高度，ZXTableView默认会将cell高度设置为cell本身高度，也就是xib中cell的高度或纯代码中在初始化方法中设置的cell的高度，若需要改动，则可以使用以下方法实现。
 self.tableView.zx_setCellHAtIndexPath = ^CGFloat(NSIndexPath *indexPath) {
     return 70;
 };
 ```
-* 滑动编辑
+#### 滑动编辑
 ```objective-c
 self.tableView.zx_editActionsForRowAtIndexPath = ^NSArray<UITableViewRowAction *> *(NSIndexPath *indexPath) {
         UITableViewRowAction *delAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
@@ -196,22 +196,63 @@ self.tableView.zx_editActionsForRowAtIndexPath = ^NSArray<UITableViewRowAction *
         return @[delAction];
     };
 ```
+#### 设置cell高度的几种方式
+* 在控制器中设置cell高度，可根据indexPath设置不同的cell高度（优先级最高，若设置了，其他高度设置方法均无效）
+```objective-c
+self.tableView.zx_setCellHAtIndexPath = ^CGFloat(NSIndexPath *indexPath) {
+    return 70;
+};
+```
+* 在cell中设置cell的高度（优先级最低）
+```objective-c
+//在cell的初始化方法中设置cell高度即可
+self.height = 50;
+```
+* 在model中设置cell的高度（优先级第二，若设置，则在cell中设置cell的高度无效）  
+
+在model.h中
+
+```objective-c
+//此处声明了cellH，则ZXTableView会自动把cell高度赋值给cellH，更改cellH即可改变cell高度
+@property (assign,nonatomic) CGFloat cellH;
+```
+在model.m中，在需要的时候更改cellH
+```objective-c
+//例如，可以重写cellH的set方法，将cell高度在原先基础上增加10
+-(void)setCellH:(CGFloat)cellH{
+    _cellH = cellH + 10;
+}
+```
+
+#### 在cell或model中获取当前的indexPath
+* 在cell中获取当前的indexPath
+```objective-c
+//在Cell.h或Cell.m中定义属性indexPath即可
+@property (strong, nonatomic) NSIndexPath *indexPath;
+```
+* 在model中获取当前的indexPath
+```objective-c
+//在Model.h或Model.m中定义属性indexPath即可
+@property (strong, nonatomic) NSIndexPath *indexPath;
+```
+***
+
 ### headerView&footerView相关，此处以headerView为例
-* 声明headerView
+#### 声明headerView
 ```objective-c
 //声明HeaderView是什么类
 self.tableView.zx_setHeaderClassInSection = ^Class(NSInteger section) {
     return [MyHeaderView class];
 };
 ```
-* 获取headerView对象
+#### 获取headerView对象
 ```objective-c
 //获取HeaderView对象并对其进行处理
 self.tableView.zx_getHeaderViewInSection = ^(NSUInteger section, MyHeaderView *headerView, NSMutableArray *secArr) {
     headerView.headerLabel.text = [NSString stringWithFormat:@"HeaderView--%lu",section];
 };
 ```
-* 以上声明headerView类与获取headerView可以写在同一个方法中
+#### 以上声明headerView类与获取headerView可以写在同一个方法中
 ```objective-c
 [self.tableView zx_setHeaderClassInSection:^Class(NSInteger) {
     return [MyHeaderView cell];
@@ -219,14 +260,46 @@ self.tableView.zx_getHeaderViewInSection = ^(NSUInteger section, MyHeaderView *h
   //获取headerView对象
 }];
 ```
-* (非必须)设置headerView高度
+#### (非必须)设置headerView高度
 ```objective-c
 //返回headerViewl高度，ZXTableView默认会将headerView高度设置为headerView本身高度，也就是xib中headerView的高度或纯代码中在初始化方法中设置的headerView的高度，若需要改动，则可以使用以下方法实现。
 self.tableView.zx_setHeaderHInSection = ^CGFloat(NSInteger section) {
     return 100;
 };
 ```
-### tableView代理事件&偏好设置相关
+#### 设置headerView&footerView高度的几种方式
+* 在控制器中设置headerView高度
+```objective-c
+self.tableView.zx_setHeaderHInSection = ^CGFloat(NSInteger section) {
+    return 100;
+};
+```
+* 在headerView中设置headerView高度
+```objective-c
+//在headerView的初始化方法中设置headerView高度即可
+self.height = 100;
+```
+
+#### 在headerView或footerView中获取当前的section
+* 在headerView中获取当前的section
+```objective-c
+//在headerView.h或headerView.m中定义属性section即可
+@property (strong, nonatomic) NSNumber *section;
+```
+
+#### headerView&footerView属性相关，此处以headerView为例
+* 无数据是否显示HeaderView，默认为YES
+```objective-c
+//无数据时不显示headerView
+self.tableView.zx_showHeaderWhenNoMsg = NO;
+```
+* 保持headerView不变（仅初始化一次），默认为NO
+```objective-c
+//保持headerView只初始化一次，之后不再重新创建
+self.tableView.zx_keepStaticHeaderView = YES;
+```
+***
+#### tableView代理事件&偏好设置相关
 * 点击了某一行cell
 ```objective-c
 //点击了某一行cell
@@ -277,64 +350,7 @@ self.tableView.zx_showFooterWhenNoMsg = YES;
 ```
 ***
 
-## Other
-### 设置cell高度的几种方式
-* 在控制器中设置cell高度，可根据indexPath设置不同的cell高度（优先级最高，若设置了，其他高度设置方法均无效）
-```objective-c
-self.tableView.zx_setCellHAtIndexPath = ^CGFloat(NSIndexPath *indexPath) {
-    return 70;
-};
-```
-* 在cell中设置cell的高度（优先级最低）
-```objective-c
-//在cell的初始化方法中设置cell高度即可
-self.height = 50;
-```
-* 在model中设置cell的高度（优先级第二，若设置，则在cell中设置cell的高度无效）  
-
-在model.h中
-
-```objective-c
-//此处声明了cellH，则ZXTableView会自动把cell高度赋值给cellH，更改cellH即可改变cell高度
-@property (assign,nonatomic) CGFloat cellH;
-```
-在model.m中，在需要的时候更改cellH
-```objective-c
-//例如，可以重写cellH的set方法，将cell高度在原先基础上增加10
--(void)setCellH:(CGFloat)cellH{
-    _cellH = cellH + 10;
-}
-```
-***
-
-### 设置headerView&footerView高度的几种方式
-* 在控制器中设置headerView高度
-```objective-c
-self.tableView.zx_setHeaderHInSection = ^CGFloat(NSInteger section) {
-    return 100;
-};
-```
-* 在headerView中设置headerView高度
-```objective-c
-//在headerView的初始化方法中设置headerView高度即可
-self.height = 100;
-```
-***
-
-### 在cell或model中获取当前的indexPath
-* 在cell中获取当前的indexPath
-```objective-c
-//在Cell.h或Cell.m中定义属性indexPath即可
-@property (strong, nonatomic) NSIndexPath *indexPath;
-```
-* 在model中获取当前的indexPath
-```objective-c
-//在Model.h或Model.m中定义属性indexPath即可
-@property (strong, nonatomic) NSIndexPath *indexPath;
-```
-***
-
-### ZXTableViewConfig
+### ZXTableViewConfig(ZXTableView配置文件)
 ```objective-c
 ///model默认去匹配的cell高度属性名 若不存在则动态生成cellHRunTime的属性名
 static NSString *const CELLH = @"cellH";
@@ -342,6 +358,8 @@ static NSString *const CELLH = @"cellH";
 static NSString *const DATAMODEL = @"model";
 ///model与cell的index属性，存储当前model与cell所属的indexPath
 static NSString *const INDEX = @"indexPath";
+///headerView与footerView的section属性，存储当前headerView与footerView所属的section
+static NSString *const SECTION = @"section";
 ///若ZXBaseTableView无法自动获取cell高度（zxdata有值即可），且用户未自定义高度，则使用默认高度
 static CGFloat const CELLDEFAULTH = 44;
 
@@ -350,6 +368,10 @@ static CGFloat const CELLDEFAULTH = 44;
 static BOOL const ShowHeaderWhenNoMsg = YES;
 ///无数据是否显示FooterView，默认为YES
 static BOOL const ShowFooterWhenNoMsg = YES;
+///保持headerView不变（仅初始化一次），默认为NO
+static BOOL const KeepStaticHeaderView = NO;
+///保持footerView不变（仅初始化一次），默认为NO
+static BOOL const KeepStaticFooterView = NO;
 ///禁止系统Cell自动高度 可以有效解决tableView跳动问题，默认为YES
 static BOOL const DisableAutomaticDimension = YES;
 ///分割线样式，默认为UITableViewCellSeparatorStyleNone
