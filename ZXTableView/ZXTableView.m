@@ -66,6 +66,9 @@
                 }
                 
             }
+            if(!self.zx_fixCellBlockAfterAutoSetModel){
+                !self.zx_getCellAtIndexPath ? : self.zx_getCellAtIndexPath(indexPath,cell,model);
+            }
             NSArray *cellProNames = [ZXTbGetProName zx_getRecursionPropertyNames:cell];
             BOOL cellContainsModel = NO;
             for (NSString *proStr in cellProNames) {
@@ -75,8 +78,14 @@
                     break;
                 }
             }
+        }else{
+            if(!self.zx_fixCellBlockAfterAutoSetModel){
+                !self.zx_getCellAtIndexPath ? : self.zx_getCellAtIndexPath(indexPath,cell,model);
+            }
         }
-        !self.zx_getCellAtIndexPath ? : self.zx_getCellAtIndexPath(indexPath,cell,model);
+        if(self.zx_fixCellBlockAfterAutoSetModel){
+            !self.zx_getCellAtIndexPath ? : self.zx_getCellAtIndexPath(indexPath,cell,model);
+        }
         [self setCell];
         return cell;
     }

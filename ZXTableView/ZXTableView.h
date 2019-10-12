@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)BOOL zx_keepStaticHeaderView;
 ///保持footerView不变（仅初始化一次），默认为NO
 @property(nonatomic, assign)BOOL zx_keepStaticFooterView;
+///控制获取cell回调在获取model之后，默认为NO
+@property(nonatomic, assign)BOOL zx_fixCellBlockAfterAutoSetModel;
 #pragma mark - 数据获取
 ///获取对应行的cell，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^zx_getCellAtIndexPath)(NSIndexPath *indexPath,id cell,id model);
