@@ -328,6 +328,10 @@ self.tableView.zx_showHeaderWhenNoMsg = YES;
 ```objective-c
 self.tableView.zx_showFooterWhenNoMsg = YES;
 ```
+* 控制获取cell回调在获取model之后，默认为NO
+```objective-c
+self.tableView.zx_fixCellBlockAfterAutoSetModel = YES;
+```
 * scrollView相关代理
 ```objective-c
 ///scrollView滚动事件
