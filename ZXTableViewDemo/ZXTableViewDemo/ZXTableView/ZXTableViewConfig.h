@@ -33,5 +33,9 @@ static BOOL const KeepStaticFooterView = NO;
 static BOOL const DisableAutomaticDimension = YES;
 ///分割线样式，默认为UITableViewCellSeparatorStyleNone
 static BOOL const DefaultSeparatorStyle =  UITableViewCellSeparatorStyleNone;
+///控制获取cell回调在获取model之后，默认为NO
+static BOOL const FixCellBlockAfterAutoSetModel = NO;
+///当选中cell的时候是否自动调用tableView的deselectRowAtIndexPath，默认为YES
+static BOOL const AutoDeselectWhenSelected = YES;
 
 #endif /* ZXTableViewConfig_h */

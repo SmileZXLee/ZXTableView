@@ -13,6 +13,7 @@
 #import "ZXTestSingleTbVC.h"
 #import "ZXTestHFTbVC.h"
 #import "ZXTestCHTbVC.h"
+#import "ZXCustomTbVC.h"
 
 @interface ZXTestMainVC ()
 @property (weak, nonatomic) IBOutlet ZXTableView *tableView;
@@ -53,6 +54,11 @@
                 VC = [[ZXTestCHTbVC alloc]init];
                 break;
             }
+            case 3:{
+                //自定义TableView
+                VC = [[ZXCustomTbVC alloc]init];
+                break;
+            }
             default:
                 break;
         }
@@ -64,7 +70,7 @@
 }
 #pragma mark 设置数据源
 -(NSMutableArray *)getTableViewData{
-    NSArray *dataArr = @[@"单一Cell的TableView",@"多个Section的TableView",@"Cell高度动态改变的TableView"];
+    NSArray *dataArr = @[@"单一Cell的TableView",@"多个Section的TableView",@"Cell高度动态改变的TableView",@"自定义TableView"];
     return [dataArr mutableCopy];
 }
 @end

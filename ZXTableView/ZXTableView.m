@@ -20,11 +20,18 @@
 #pragma mark 设置ZXTableView，此设置会应用到全部的ZXTableView中
 -(void)setZXTableView{
     [self privateSetZXTableView];
+    [self zx_setTableView];
 }
 #pragma mark ZXTableView的cell，此设置会应用到全部的ZXTableView的cell中
--(void)setCell{
+-(void)zx_setCell:(UITableViewCell *)cell{
     
 }
+
+#pragma mark ZXTableView的cell，此设置会应用到全部的ZXTableView的cell中
+-(void)zx_setTableView{
+    
+}
+
 
 #pragma mark - UITableViewDataSource
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -86,7 +93,7 @@
         if(self.zx_fixCellBlockAfterAutoSetModel){
             !self.zx_getCellAtIndexPath ? : self.zx_getCellAtIndexPath(indexPath,cell,model);
         }
-        [self setCell];
+        [self zx_setCell:cell];
         return cell;
     }
 }
@@ -127,11 +134,12 @@
 #pragma mark - UITableViewDelegate
 #pragma mark tableView 选中某一indexPath
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self deselectRowAtIndexPath:indexPath animated:YES];
+    if(self.zx_autoDeselectWhenSelected){
+        [self deselectRowAtIndexPath:indexPath animated:YES];
+    }
     if([self.zxDelegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]){
         [self.zxDelegate tableView:tableView didSelectRowAtIndexPath:indexPath];
     }else{
-        [self deselectRowAtIndexPath:indexPath animated:YES];
         id model = [self getModelAtIndexPath:indexPath];
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         !self.zx_didSelectedAtIndexPath ? : self.zx_didSelectedAtIndexPath(indexPath,model,cell);
@@ -488,6 +496,8 @@
     self.zx_showFooterWhenNoMsg = ShowFooterWhenNoMsg;
     self.zx_keepStaticHeaderView = KeepStaticHeaderView;
     self.zx_keepStaticFooterView = KeepStaticFooterView;
+    self.zx_fixCellBlockAfterAutoSetModel = FixCellBlockAfterAutoSetModel;
+    self.zx_autoDeselectWhenSelected = AutoDeselectWhenSelected;
 }
 #pragma mark - 生命周期
 -(instancetype)init{

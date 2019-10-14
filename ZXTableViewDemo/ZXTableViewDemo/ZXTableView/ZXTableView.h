@@ -44,6 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)BOOL zx_keepStaticFooterView;
 ///控制获取cell回调在获取model之后，默认为NO
 @property(nonatomic, assign)BOOL zx_fixCellBlockAfterAutoSetModel;
+///当选中cell的时候是否自动调用tableView的deselectRowAtIndexPath，默认为YES
+@property(nonatomic, assign)BOOL zx_autoDeselectWhenSelected;
 #pragma mark - 数据获取
 ///获取对应行的cell，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^zx_getCellAtIndexPath)(NSIndexPath *indexPath,id cell,id model);
@@ -51,6 +53,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void (^zx_getHeaderViewInSection)(NSUInteger section,id headerView,NSMutableArray *secArr);
 ///获取对应section的footerView，把id改成对应类名即可无需强制转换，secArr为对应section的model数组
 @property (nonatomic, copy) void (^zx_getFooterViewInSection)(NSUInteger section,id footerView,NSMutableArray *secArr);
+#pragma mark - 偏好设置(全局设置)
+///在子类中重写这个方法，可以统一设置所有cell样式
+-(void)zx_setCell:(UITableViewCell *)cell;
+///在子类中重写这个方法，可以统一设置所有tableView样式
+-(void)zx_setTableView;
+
 #pragma mark - 快速构建
 ///声明cell的类并返回cell对象
 -(void)zx_setCellClassAtIndexPath:(Class (^)(NSIndexPath * indexPath)) setCellClassCallBack returnCell:(void (^)(NSIndexPath * indexPath,id cell,id model))returnCellCallBack;

@@ -14,6 +14,9 @@
 		7416AFD4224FD1A200BC8914 /* ZXTestCHTbModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7416AFD3224FD1A200BC8914 /* ZXTestCHTbModel.m */; };
 		74530C27224FD75100B7ED7B /* ZXTestCHTbSpaceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 74530C26224FD75100B7ED7B /* ZXTestCHTbSpaceHeader.m */; };
 		74530C2B224FE6C800B7ED7B /* JPFPSStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 74530C2A224FE6C800B7ED7B /* JPFPSStatus.m */; };
+		748F9CDD235437C700190591 /* ZXCustomTbVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 748F9CDB235437C700190591 /* ZXCustomTbVC.m */; };
+		748F9CDE235437C700190591 /* ZXCustomTbVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 748F9CDC235437C700190591 /* ZXCustomTbVC.xib */; };
+		748F9CE1235437DD00190591 /* ZXCustomTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 748F9CE0235437DD00190591 /* ZXCustomTableView.m */; };
 		74A29F2F224F52E500B00511 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A29F2E224F52E500B00511 /* AppDelegate.m */; };
 		74A29F37224F52E500B00511 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74A29F36224F52E500B00511 /* Assets.xcassets */; };
 		74A29F3A224F52E500B00511 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74A29F38224F52E500B00511 /* LaunchScreen.storyboard */; };
@@ -71,6 +74,11 @@
 		74530C26224FD75100B7ED7B /* ZXTestCHTbSpaceHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXTestCHTbSpaceHeader.m; sourceTree = "<group>"; };
 		74530C29224FE6C800B7ED7B /* JPFPSStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPFPSStatus.h; sourceTree = "<group>"; };
 		74530C2A224FE6C800B7ED7B /* JPFPSStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPFPSStatus.m; sourceTree = "<group>"; };
+		748F9CDA235437C700190591 /* ZXCustomTbVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXCustomTbVC.h; sourceTree = "<group>"; };
+		748F9CDB235437C700190591 /* ZXCustomTbVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXCustomTbVC.m; sourceTree = "<group>"; };
+		748F9CDC235437C700190591 /* ZXCustomTbVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZXCustomTbVC.xib; sourceTree = "<group>"; };
+		748F9CDF235437DD00190591 /* ZXCustomTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXCustomTableView.h; sourceTree = "<group>"; };
+		748F9CE0235437DD00190591 /* ZXCustomTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXCustomTableView.m; sourceTree = "<group>"; };
 		74A29F2A224F52E500B00511 /* ZXTableViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZXTableViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74A29F2D224F52E500B00511 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		74A29F2E224F52E500B00511 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -185,6 +193,26 @@
 			path = JPFPSStatus;
 			sourceTree = "<group>";
 		};
+		748F9CD82354376300190591 /* ZXCustomTb(自定义TableView) */ = {
+			isa = PBXGroup;
+			children = (
+				748F9CD92354378C00190591 /* View */,
+				748F9CDA235437C700190591 /* ZXCustomTbVC.h */,
+				748F9CDB235437C700190591 /* ZXCustomTbVC.m */,
+				748F9CDC235437C700190591 /* ZXCustomTbVC.xib */,
+			);
+			path = "ZXCustomTb(自定义TableView)";
+			sourceTree = "<group>";
+		};
+		748F9CD92354378C00190591 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				748F9CDF235437DD00190591 /* ZXCustomTableView.h */,
+				748F9CE0235437DD00190591 /* ZXCustomTableView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		74A29F21224F52E500B00511 = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +241,7 @@
 				74EA2E60224F89B1003F55E3 /* ZXTestSingleTb(单一Cell) */,
 				74EA2E70224F944E003F55E3 /* ZXTestHFTb(多Section) */,
 				7416AFC5224FCC8900BC8914 /* ZXTestCHTb(动态高度) */,
+				748F9CD82354376300190591 /* ZXCustomTb(自定义TableView) */,
 				74530C28224FE6C800B7ED7B /* JPFPSStatus */,
 				74A29F2D224F52E500B00511 /* AppDelegate.h */,
 				74A29F2E224F52E500B00511 /* AppDelegate.m */,
@@ -473,6 +502,7 @@
 				7416AFD1224FCF9500BC8914 /* ZXTestCHTbCell.xib in Resources */,
 				74EA2E81224FC690003F55E3 /* ZXTestHFFooterView.xib in Resources */,
 				74A29F37224F52E500B00511 /* Assets.xcassets in Resources */,
+				748F9CDE235437C700190591 /* ZXCustomTbVC.xib in Resources */,
 				74EA2E6C224F8BB3003F55E3 /* ZXTestSingleTbCell.xib in Resources */,
 				74EA2E77224F9468003F55E3 /* ZXTestHFTbVC.xib in Resources */,
 			);
@@ -506,12 +536,14 @@
 				74EA2E66224F89D9003F55E3 /* ZXTestSingleTbVC.m in Sources */,
 				74530C2B224FE6C800B7ED7B /* JPFPSStatus.m in Sources */,
 				74EA2E51224F60CE003F55E3 /* NSObject+ZXTbAddPro.m in Sources */,
+				748F9CDD235437C700190591 /* ZXCustomTbVC.m in Sources */,
 				74EA2E47224F5353003F55E3 /* ZXTableView.m in Sources */,
 				74A29F3D224F52E500B00511 /* main.m in Sources */,
 				7416AFD4224FD1A200BC8914 /* ZXTestCHTbModel.m in Sources */,
 				74EA2E5E224F7B34003F55E3 /* ZXTestMainCell.m in Sources */,
 				74EA2E7A224F9D7A003F55E3 /* ZXTestHFHeaderView.m in Sources */,
 				74EA2E6F224F8F88003F55E3 /* ZXTestSingleTbModel.m in Sources */,
+				748F9CE1235437DD00190591 /* ZXCustomTableView.m in Sources */,
 				74EA2E4E224F5C4C003F55E3 /* ZXTbGetProName.m in Sources */,
 				74EA2E6B224F8BB3003F55E3 /* ZXTestSingleTbCell.m in Sources */,
 				74EA2E4B224F5695003F55E3 /* NSObject+ZXTbSafeValue.m in Sources */,
