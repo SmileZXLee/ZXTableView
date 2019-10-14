@@ -149,6 +149,23 @@ self.tableView.zxDatas = dataArr;
 
 ***
 
+### 自定义TableView
+* 创建ZXCustomTableView继承于ZXTableView
+* 在ZXCustomTableView.m中重写zx_setTableView和zx_setCell:方法即可
+```objective-c
+@implementation ZXCustomTableView
+//重写父类zx_setTableView，统一设置tableView样式和偏好
+- (void)zx_setTableView{
+    self.backgroundColor = [UIColor redColor];
+    self.zx_autoDeselectWhenSelected = NO;
+}
+//重写父类zx_setTableView，统一设置cell样式和偏好
+- (void)zx_setCell:(UITableViewCell *)cell{
+    cell.backgroundColor = [UIColor greenColor];
+}
+@end
+***
+
 ## 具体使用说明
 ### 如何快速使用
 * 创建一个tableView的步骤大致分为，声明cell，声明headerView&footerView，self.tableView.zxDatas赋值，在cell中声明一个含有“model”的属性名，重写该属性的set方法即可。
