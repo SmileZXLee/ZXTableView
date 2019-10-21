@@ -11,6 +11,7 @@
 #import "ZXTbGetProName.h"
 #import "NSObject+ZXTbSafeValue.h"
 #import "NSObject+ZXTbAddPro.h"
+#import "UIView+ZXTbGetResponder.h"
 @interface ZXTableView()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic, strong)NSMutableDictionary *zx_headerViewCacheDic;
 @property(nonatomic, strong)NSMutableDictionary *zx_footerViewCacheDic;
@@ -137,12 +138,15 @@
     if(self.zx_autoDeselectWhenSelected){
         [self deselectRowAtIndexPath:indexPath animated:YES];
     }
+    id model = [self getModelAtIndexPath:indexPath];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if([self.zxDelegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]){
         [self.zxDelegate tableView:tableView didSelectRowAtIndexPath:indexPath];
     }else{
-        id model = [self getModelAtIndexPath:indexPath];
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         !self.zx_didSelectedAtIndexPath ? : self.zx_didSelectedAtIndexPath(indexPath,model,cell);
+    }
+    if(self.zx_autoPushConfigDictionary){
+        [self handleDidSelectedAtIndexPath:indexPath model:model cell:cell];
     }
 }
 #pragma mark tableView 取消选中某一indexPath
@@ -461,6 +465,100 @@
         [self.zx_footerViewCacheDic setObject:footerView forKey:sectionStr];
     }
     return footerView;
+}
+
+#pragma mark 获取当前tableView所在的导航控制器
+- (UINavigationController *)getCurrentNavigationController{
+    return [self zx_getResponderWithClass:[UINavigationController class]];
+}
+
+#pragma mark 根据zx_autoPushConfigDictionary设置控制器Push及参数
+- (void)handleDidSelectedAtIndexPath:(NSIndexPath *)indexPath model:(id)model cell:(UITableViewCell *)cell{
+    if(self.zx_autoPushConfigDictionary){
+        NSMutableDictionary *muAutoPushConfigDictionary = [self.zx_autoPushConfigDictionary mutableCopy];
+        [self.zx_autoPushConfigDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            if([key isKindOfClass:[NSString class]]){
+                NSString *lowercaseKey = [key lowercaseString];
+                if([lowercaseKey isEqualToString:AutoPushConfigPushVCKey]){
+                    [muAutoPushConfigDictionary setObject:obj forKey:lowercaseKey];
+                    *(stop) = YES;
+                }
+            }
+        }];
+        id vcValue = nil;
+        if([muAutoPushConfigDictionary.allKeys containsObject:AutoPushConfigPushVCKey]){
+            vcValue = [muAutoPushConfigDictionary valueForKey:AutoPushConfigPushVCKey];
+        }else{
+            NSString *desc = [NSString stringWithFormat:@"您必须设置key为%@的value，若不需要自动跳转功能，请勿给zx_autoPushConfigDictionary赋值！",AutoPushConfigPushVCKey];
+            NSAssert(NO, desc);
+            return;
+        }
+        UINavigationController *currentNav = [self getCurrentNavigationController];
+        if(currentNav){
+            id vcObj = [self getObjFromUnknowValue:vcValue];
+            if(vcObj){
+                [muAutoPushConfigDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                    if(![key isEqualToString:AutoPushConfigPushVCKey]){
+                        id value = nil;
+                        if([obj isKindOfClass:[NSString class]]){
+                            obj = [obj lowercaseString];
+                            NSArray *comapreKeyArr = @[AutoPushConfigModelValueKey,AutoPushConfigIndexPathValueKey,AutoPushConfigCellValueKey];
+                            for (NSString *comapreKey in comapreKeyArr) {
+                                value = [self getAutoPushConfigDictionaryAttrValueWithValueKey:obj compareValueKey:comapreKey model:model indexPath:indexPath cell:cell];
+                                if(value)break;
+                            }
+                            
+                        }else{
+                            value = obj;
+                        }
+                        if(value){
+                            [vcObj setValue:value forKeyPath:key];
+                        }
+                    }
+                }];
+                [[self getCurrentNavigationController] pushViewController:vcObj animated:YES];
+            }
+        }
+        
+    }
+}
+
+#pragma mark 根据unknowValue类型获取其对象
+- (id)getObjFromUnknowValue:(id)unknowValue{
+    if([unknowValue isKindOfClass:[NSString class]]){
+        return [NSClassFromString(unknowValue) new];
+    }
+    if([unknowValue respondsToSelector:@selector(new)]){
+        return [unknowValue new];
+    }
+    if([unknowValue isKindOfClass:[NSObject class]]){
+        return unknowValue;
+    }
+    return nil;
+}
+
+#pragma mark 获取AutoPushConfigDictionary所匹配的value值
+- (id)getAutoPushConfigDictionaryAttrValueWithValueKey:(NSString *)valueKey compareValueKey:(NSString *)compareValueKey model:(id)model indexPath:(NSIndexPath *)indexPath cell:(UITableViewCell *)cell{
+    id value = nil;
+    id targerValue = nil;
+    if([compareValueKey isEqualToString:AutoPushConfigIndexPathValueKey]){
+        targerValue = indexPath;
+    }else if([compareValueKey isEqualToString:AutoPushConfigModelValueKey]){
+        targerValue = model;
+    }else if([compareValueKey isEqualToString:AutoPushConfigCellValueKey]){
+        targerValue = cell;
+    }
+    NSString *compareValueKeyAddition = [NSString stringWithFormat:@"%@.",compareValueKey];
+    if([valueKey hasPrefix:compareValueKeyAddition] || [valueKey isEqualToString:compareValueKey]){
+        if([valueKey isEqualToString:compareValueKey]){
+            value = targerValue;
+        }else{
+            if(targerValue){
+                value = [targerValue valueForKeyPath:[valueKey substringFromIndex:compareValueKeyAddition.length]];
+            }
+        }
+    }
+    return value;
 }
 
 #pragma mark zx_disableAutomaticDimension Setter

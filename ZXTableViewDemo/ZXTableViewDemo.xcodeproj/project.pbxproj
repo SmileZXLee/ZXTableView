@@ -23,6 +23,7 @@
 		74A29F3D224F52E500B00511 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A29F3C224F52E500B00511 /* main.m */; };
 		74A29F47224F52E500B00511 /* ZXTableViewDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A29F46224F52E500B00511 /* ZXTableViewDemoTests.m */; };
 		74A29F52224F52E500B00511 /* ZXTableViewDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A29F51224F52E500B00511 /* ZXTableViewDemoUITests.m */; };
+		74B68675235E1C5B00804DB9 /* UIView+ZXTbGetResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B68674235E1C5B00804DB9 /* UIView+ZXTbGetResponder.m */; };
 		74EA2E47224F5353003F55E3 /* ZXTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74EA2E46224F5353003F55E3 /* ZXTableView.m */; };
 		74EA2E4B224F5695003F55E3 /* NSObject+ZXTbSafeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 74EA2E4A224F5695003F55E3 /* NSObject+ZXTbSafeValue.m */; };
 		74EA2E4E224F5C4C003F55E3 /* ZXTbGetProName.m in Sources */ = {isa = PBXBuildFile; fileRef = 74EA2E4D224F5C4C003F55E3 /* ZXTbGetProName.m */; };
@@ -92,6 +93,8 @@
 		74A29F4D224F52E500B00511 /* ZXTableViewDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZXTableViewDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		74A29F51224F52E500B00511 /* ZXTableViewDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXTableViewDemoUITests.m; sourceTree = "<group>"; };
 		74A29F53224F52E500B00511 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		74B68673235E1C5B00804DB9 /* UIView+ZXTbGetResponder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+ZXTbGetResponder.h"; sourceTree = "<group>"; };
+		74B68674235E1C5B00804DB9 /* UIView+ZXTbGetResponder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+ZXTbGetResponder.m"; sourceTree = "<group>"; };
 		74EA2E45224F5353003F55E3 /* ZXTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXTableView.h; sourceTree = "<group>"; };
 		74EA2E46224F5353003F55E3 /* ZXTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXTableView.m; sourceTree = "<group>"; };
 		74EA2E49224F5695003F55E3 /* NSObject+ZXTbSafeValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+ZXTbSafeValue.h"; sourceTree = "<group>"; };
@@ -291,6 +294,8 @@
 				74EA2E50224F60CE003F55E3 /* NSObject+ZXTbAddPro.m */,
 				74EA2E4C224F5C4C003F55E3 /* ZXTbGetProName.h */,
 				74EA2E4D224F5C4C003F55E3 /* ZXTbGetProName.m */,
+				74B68673235E1C5B00804DB9 /* UIView+ZXTbGetResponder.h */,
+				74B68674235E1C5B00804DB9 /* UIView+ZXTbGetResponder.m */,
 			);
 			path = ZXTbExtension;
 			sourceTree = "<group>";
@@ -549,6 +554,7 @@
 				74EA2E4B224F5695003F55E3 /* NSObject+ZXTbSafeValue.m in Sources */,
 				74A29F2F224F52E500B00511 /* AppDelegate.m in Sources */,
 				7416AFD0224FCF9500BC8914 /* ZXTestCHTbCell.m in Sources */,
+				74B68675235E1C5B00804DB9 /* UIView+ZXTbGetResponder.m in Sources */,
 				74EA2E7F224FC684003F55E3 /* ZXTestHFFooterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
