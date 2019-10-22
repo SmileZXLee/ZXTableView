@@ -14,7 +14,6 @@
     CGFloat commentH = [self getStrHeightWithText:comment font:[UIFont systemFontOfSize:14] viewWidth:[UIScreen mainScreen].bounds.size.width - 15 * 2];
     //此处将计算的cell高度赋值给cellH即可
     self.cellH = commentH + 10 * 2 + 50;
-    
 }
 
 - (CGFloat)getStrHeightWithText:(NSString *)text font:(UIFont *)font viewWidth:(CGFloat)width {

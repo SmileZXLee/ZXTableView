@@ -70,8 +70,7 @@
             [model setValue:[NSNumber numberWithInteger:indexPath.section] forKey:@"zx_sectionInTableView"];
             CGFloat cellH = ((UITableViewCell *)cell).frame.size.height;
             if(cellH && ![[model zx_safeValueForKey:CELLH] floatValue]){
-                NSMutableArray *modelProNames = [ZXTbGetProName zx_getRecursionPropertyNames:model];
-                if([modelProNames containsObject:CELLH]){
+                if([model respondsToSelector:NSSelectorFromString(CELLH)]){
                     [model zx_safeSetValue:[NSNumber numberWithFloat:cellH] forKey:CELLH];
                 }else{
                     [model setValue:[NSNumber numberWithFloat:cellH] forKey:@"zx_cellHRunTime"];
