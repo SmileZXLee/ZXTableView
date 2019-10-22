@@ -7,6 +7,10 @@
 //  https://github.com/SmileZXLee/ZXTableView
 
 #import <UIKit/UIKit.h>
+//在任何view中获取所属的控制器、导航控制器，tableView和ZXTableView的zxDatas
+#import "UIView+ZXTbGetResponder.h"
+//在任何对象中获取在tableView所属的indexPath和section
+#import "NSObject+ZXTbAddPro.h"
 NS_ASSUME_NONNULL_BEGIN
 @interface ZXTableView : UITableView
 #pragma mark - 数据设置
@@ -32,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) CGFloat (^zx_setHeaderHInSection)(NSInteger section);
 ///设置FooterView高度，非必须，若设置了则自动设置的FooterView高度无效
 @property (nonatomic, copy) CGFloat (^zx_setFooterHInSection)(NSInteger section);
+///设置点击cell自动跳转的配置字典，如@{@"vc":@"TestVC",@"testGoodid":@"model.goodid"}则代表点击cell自动push到控制器TestVC，且将cell对应model的goodid赋值给TestVC控制器的testGoodid属性
+@property(nonatomic, strong) NSDictionary *zx_autoPushConfigDictionary;
 ///禁止系统Cell自动高度 可以有效解决tableView跳动问题，默认为YES
 @property(nonatomic, assign)BOOL zx_disableAutomaticDimension;
 ///无数据是否显示HeaderView，默认为YES

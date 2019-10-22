@@ -37,5 +37,13 @@ static BOOL const DefaultSeparatorStyle =  UITableViewCellSeparatorStyleNone;
 static BOOL const FixCellBlockAfterAutoSetModel = NO;
 ///当选中cell的时候是否自动调用tableView的deselectRowAtIndexPath，默认为YES
 static BOOL const AutoDeselectWhenSelected = YES;
+///zx_autoPushConfigDictionary获取push控制器的key
+static NSString *const AutoPushConfigPushVCKey = @"vc";
+///zx_autoPushConfigDictionary获取model值的key
+static NSString *const AutoPushConfigModelValueKey = @"model";
+///zx_autoPushConfigDictionary获取indexpath值的key
+static NSString *const AutoPushConfigIndexPathValueKey = @"indexpath";
+///zx_autoPushConfigDictionary获取cell值的key
+static NSString *const AutoPushConfigCellValueKey = @"cell";
 
 #endif /* ZXTableViewConfig_h */
