@@ -404,25 +404,25 @@ self.tableView.zx_fixCellBlockAfterAutoSetModel = YES;
 
 ### UIGet（在view中直接获取关键视图）
 #### Cell
-* 获取cell所属的tableView
+* 获取cell所在的tableView
 ```objective-c
 //在cell中
 UITableView *tableView = self.zx_tableView;
 ```
-* 获取cell所属的控制器
+* 获取cell所在的控制器
 ```objective-c
 //在cell中
- UIViewController *vc = self.zx_vc;
+UIViewController *vc = self.zx_vc;
 ```
-* 获取cell所属的导航控制器
+* 获取cell所在的导航控制器
 ```objective-c
 //在cell中
- UIViewController *vc = self.zx_navVc;
+UINavigationController *nav = self.zx_navVc;
 ```
-* 获取cell所属的ZXTableView的zxDatas可变数组
+* 获取cell所在的ZXTableView的zxDatas可变数组
 ```objective-c
 //在cell中
- UIViewController *vc = self.zx_tableViewDatas;
+NSMutableArray *datas = self.zx_tableViewDatas;
 ```
 
 #### HeaderView & FooterView
