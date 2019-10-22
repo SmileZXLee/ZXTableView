@@ -30,7 +30,7 @@
 }
 
 - (NSInteger)zx_sectionInTableView{
-    return (NSInteger)[objc_getAssociatedObject(self, @"zx_sectionInTableView") integerValue];
+    return ([objc_getAssociatedObject(self, @"zx_sectionInTableView") unsignedIntegerValue]);
 }
 
 
