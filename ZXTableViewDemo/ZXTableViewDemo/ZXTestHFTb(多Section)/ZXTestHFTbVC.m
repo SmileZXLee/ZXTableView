@@ -40,7 +40,8 @@
     };
     //获取HeaderView对象并对其进行处理
     self.tableView.zx_getHeaderViewInSection = ^(NSUInteger section, ZXTestHFHeaderView *headerView, NSMutableArray *secArr) {
-        headerView.headerLabel.text = [NSString stringWithFormat:@"HeaderView--%lu",section];
+        //headerView.headerLabel.text = [NSString stringWithFormat:@"HeaderView--%lu",section];
+        //换了一种写法，请查看ZXTestHFHeaderView.m
     };
     //获取FooterView对象并对其进行处理
     self.tableView.zx_getFooterViewInSection = ^(NSUInteger section, ZXTestHFFooterView *footerView, NSMutableArray *secArr) {
@@ -49,6 +50,14 @@
     //设置cell的高度（非必须）
     self.tableView.zx_setCellHAtIndexPath = ^CGFloat(NSIndexPath *indexPath) {
         return 60;
+    };
+    //设置headerView的高度（非必须）
+    self.tableView.zx_setHeaderHInSection = ^CGFloat(NSInteger section) {
+        return 50;
+    };
+    //设置footerView的高度（非必须）
+    self.tableView.zx_setFooterHInSection = ^CGFloat(NSInteger section) {
+        return 50;
     };
 }
 

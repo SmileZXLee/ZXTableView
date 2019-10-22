@@ -7,6 +7,10 @@
 //  https://github.com/SmileZXLee/ZXTableView
 
 #import <UIKit/UIKit.h>
+//在任何view中获取所属的控制器、导航控制器，tableView和ZXTableView的zxDatas
+#import "UIView+ZXTbGetResponder.h"
+//在任何对象中获取在tableView所属的indexPath和section
+#import "NSObject+ZXTbAddPro.h"
 NS_ASSUME_NONNULL_BEGIN
 @interface ZXTableView : UITableView
 #pragma mark - 数据设置

@@ -7,16 +7,8 @@
 //
 
 #import "ZXTestHFHeaderView.h"
-
 @implementation ZXTestHFHeaderView
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)setZx_sectionInTableView:(NSUInteger)zx_sectionInTableView{
+    self.headerLabel.text = [NSString stringWithFormat:@"HeaderView--%lu",zx_sectionInTableView];;
 }
-*/
-
-
 @end

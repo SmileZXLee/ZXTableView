@@ -62,15 +62,19 @@
             }
         }
         if(model){
-            [model zx_safeSetValue:indexPath forKey:INDEX];
             [cell zx_safeSetValue:indexPath forKey:INDEX];
+            [model zx_safeSetValue:indexPath forKey:INDEX];
+            [cell setValue:indexPath forKey:@"zx_indexPathInTableView"];
+            [model setValue:indexPath forKey:@"zx_indexPathInTableView"];
+            [cell setValue:[NSNumber numberWithInteger:indexPath.section] forKey:@"zx_sectionInTableView"];
+            [model setValue:[NSNumber numberWithInteger:indexPath.section] forKey:@"zx_sectionInTableView"];
             CGFloat cellH = ((UITableViewCell *)cell).frame.size.height;
             if(cellH && ![[model zx_safeValueForKey:CELLH] floatValue]){
                 NSMutableArray *modelProNames = [ZXTbGetProName zx_getRecursionPropertyNames:model];
                 if([modelProNames containsObject:CELLH]){
                     [model zx_safeSetValue:[NSNumber numberWithFloat:cellH] forKey:CELLH];
                 }else{
-                    [model setCellHRunTime:[NSNumber numberWithFloat:cellH]];
+                    [model setValue:[NSNumber numberWithFloat:cellH] forKey:@"zx_cellHRunTime"];
                 }
                 
             }
@@ -193,7 +197,7 @@
                 if(cellH){
                     return cellH;
                 }else{
-                    return [[model cellHRunTime] floatValue];
+                    return [[model valueForKey:@"zx_cellHRunTime"] floatValue];
                 }
             }
             else{
@@ -226,6 +230,7 @@
     NSMutableArray *secArr = self.zxDatas.count ? [self isMultiDatas] ? self.zxDatas[section] : self.zxDatas : nil;
     !self.zx_getHeaderViewInSection ? : self.zx_getHeaderViewInSection(section,headerView,secArr);
     [headerView zx_safeSetValue:[NSNumber numberWithInteger:section] forKey:SECTION];
+    [headerView setValue:[NSNumber numberWithInteger:section] forKey:@"zx_sectionInTableView"];
     return !secArr.count ? self.zx_showHeaderWhenNoMsg ? headerView : nil : headerView;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
@@ -246,6 +251,7 @@
     NSMutableArray *secArr = self.zxDatas.count ? [self isMultiDatas] ? self.zxDatas[section] : self.zxDatas : nil;
     !self.zx_getFooterViewInSection ? : self.zx_getFooterViewInSection(section,footerView,secArr);
     [footerView zx_safeSetValue:[NSNumber numberWithInteger:section] forKey:SECTION];
+    [footerView setValue:[NSNumber numberWithInteger:section] forKey:@"zx_sectionInTableView"];
     return !secArr.count ? self.zx_showFooterWhenNoMsg ? footerView : nil : footerView;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
