@@ -29,8 +29,8 @@
     objc_setAssociatedObject(self, @"zx_sectionInTableView", [NSNumber numberWithInteger:zx_sectionInTableView], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NSInteger)zx_sectionInTableView{
-    return (NSInteger)[objc_getAssociatedObject(self, @"zx_sectionInTableView") integerValue];
+- (NSUInteger)zx_sectionInTableView{
+    return [objc_getAssociatedObject(self, @"zx_sectionInTableView") unsignedIntegerValue];
 }
 
 
