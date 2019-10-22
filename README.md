@@ -245,13 +245,27 @@ self.height = 50;
 #### 在cell或model中获取当前的indexPath
 * 在cell中获取当前的indexPath
 ```objective-c
-//在Cell.h或Cell.m中定义属性indexPath即可
+//在Cell.h或Cell.m中定义属性indexPath，然后通过self.indexPath获取
 @property (strong, nonatomic) NSIndexPath *indexPath;
 ```
+或
+
+```objective-c
+//在cell中直接通过self.zx_indexPathInTableView直接获取(需要'#import "ZXTableView.h"')
+ NSIndexPath *indexPath = self.zx_indexPathInTableView;
+```
+如果需要根据indexPath给cell赋值，建议重写zx_indexPathInTableView的set方法并在set方法中进行赋值，例子可参见下方headerView的示例
+
 * 在model中获取当前的indexPath
 ```objective-c
-//在Model.h或Model.m中定义属性indexPath即可
+//在Model.h或Model.m中定义属性indexPath，然后通过self.indexPath获取
 @property (strong, nonatomic) NSIndexPath *indexPath;
+```
+或
+
+```objective-c
+//在model中直接通过self.zx_indexPathInTableView直接获取(需要'#import "ZXTableView.h"')
+ NSIndexPath *indexPath = self.zx_indexPathInTableView;
 ```
 ***
 
@@ -303,6 +317,22 @@ self.height = 100;
 ```objective-c
 //在headerView.h或headerView.m中定义属性section即可
 @property (strong, nonatomic) NSNumber *section;
+```
+或
+
+```objective-c
+//在headerView中直接通过self.zx_sectionInTableView直接获取(需要'#import "ZXTableView.h"')
+NSUInteger section = self.zx_sectionInTableView;
+```
+
+如果需要根据section给headerView赋值，建议重写zx_sectionInTableView的set方法并在set方法中进行赋值，如
+```objective-c
+#import "ZXTestHFHeaderView.h"
+@implementation ZXTestHFHeaderView
+- (void)setZx_sectionInTableView:(NSUInteger)zx_sectionInTableView{
+    self.headerLabel.text = [NSString stringWithFormat:@"HeaderView--%lu",zx_sectionInTableView];;
+}
+@end
 ```
 
 #### headerView&footerView属性相关，此处以headerView为例
@@ -372,34 +402,56 @@ self.tableView.zx_fixCellBlockAfterAutoSetModel = YES;
 ```
 ***
 
-### ZXTableViewConfig(ZXTableView配置文件)
+### UIGet（在view中直接获取关键视图）
+#### Cell
+* 获取cell所属的tableView
 ```objective-c
-///model默认去匹配的cell高度属性名 若不存在则动态生成cellHRunTime的属性名
-static NSString *const CELLH = @"cellH";
-///cell会自动赋值包含“model”的属性
-static NSString *const DATAMODEL = @"model";
-///model与cell的index属性，存储当前model与cell所属的indexPath
-static NSString *const INDEX = @"indexPath";
-///headerView与footerView的section属性，存储当前headerView与footerView所属的section
-static NSString *const SECTION = @"section";
-///若ZXBaseTableView无法自动获取cell高度（zxdata有值即可），且用户未自定义高度，则使用默认高度
-static CGFloat const CELLDEFAULTH = 44;
-
-#pragma mark - TableView默认偏好配置
-///无数据是否显示HeaderView，默认为YES
-static BOOL const ShowHeaderWhenNoMsg = YES;
-///无数据是否显示FooterView，默认为YES
-static BOOL const ShowFooterWhenNoMsg = YES;
-///保持headerView不变（仅初始化一次），默认为NO
-static BOOL const KeepStaticHeaderView = NO;
-///保持footerView不变（仅初始化一次），默认为NO
-static BOOL const KeepStaticFooterView = NO;
-///禁止系统Cell自动高度 可以有效解决tableView跳动问题，默认为YES
-static BOOL const DisableAutomaticDimension = YES;
-///分割线样式，默认为UITableViewCellSeparatorStyleNone
-static BOOL const DefaultSeparatorStyle =  UITableViewCellSeparatorStyleNone;
+//在cell中
+UITableView *tableView = self.zx_tableView;
 ```
-***
+* 获取cell所属的控制器
+```objective-c
+//在cell中
+ UIViewController *vc = self.zx_vc;
+```
+* 获取cell所属的导航控制器
+```objective-c
+//在cell中
+ UIViewController *vc = self.zx_navVc;
+```
+* 获取cell所属的ZXTableView的zxDatas可变数组
+```objective-c
+//在cell中
+ UIViewController *vc = self.zx_tableViewDatas;
+```
+
+#### HeaderView & FooterView
+* 同cell
+
+### 自动跳转
+#### 设置self.tableView.zx_autoPushConfigDictionary可以实现自动跳转
+* 自动跳转仅限于点击任何cell都跳转同一控制器的情况
+* 点击任何cell都跳转到TestVC，此处"vc"key大小写均可以，value则为需要跳转的控制器名
+```objective-c
+//在控制器中
+self.tableView.zx_autoPushConfigDictionary = @{@"vc":@"TestVC"};
+```
+* 点击任何cell都跳转到TestVC，且将点击处的indexPath.row赋值给TestVC的myId属性
+```objective-c
+//在控制器中
+self.tableView.zx_autoPushConfigDictionary = @{@"vc":@"TestVC",@"myId":@"indexPath.row"};
+```
+* 点击任何cell都跳转到TestVC，且将点击处的model.name赋值给TestVC的myName属性
+```objective-c
+//在控制器中
+self.tableView.zx_autoPushConfigDictionary = @{@"vc":@"TestVC",@"myName":@"model.name"};
+```
+* 点击任何cell都跳转到TestVC，且将局部变量testValue赋值给TestVC的myTestValue属性
+```objective-c
+//在控制器中
+self.tableView.zx_autoPushConfigDictionary = @{@"vc":@"TestVC",@"myTestValue":testValue};
+```
+* 通过自动跳转的配置您可以无需实现didSelect方法即可实现点击cell控制器自动跳转且自动赋值
 
 ## 感谢使用，有任何问题欢迎随时issue我
 
