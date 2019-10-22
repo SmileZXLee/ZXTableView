@@ -27,6 +27,7 @@
     self.delBtn.layer.cornerRadius = 2;
     self.delBtn.hidden = YES;
 }
+
 -(void)setSTbModel:(ZXTestSingleTbModel *)sTbModel{
     _sTbModel = sTbModel;
     self.iconImgV.image = sTbModel.iconImg;
