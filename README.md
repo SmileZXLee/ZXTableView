@@ -428,6 +428,8 @@ UITableView *tableView = self.zx_tableView;
 #### HeaderView & FooterView
 * 同cell
 
+***
+
 ### 自动跳转
 #### 设置self.tableView.zx_autoPushConfigDictionary可以实现自动跳转
 * 自动跳转仅限于点击任何cell都跳转同一控制器的情况
@@ -452,6 +454,8 @@ self.tableView.zx_autoPushConfigDictionary = @{@"vc":@"TestVC",@"myName":@"model
 self.tableView.zx_autoPushConfigDictionary = @{@"vc":@"TestVC",@"myTestValue":testValue};
 ```
 * 通过自动跳转的配置您可以无需实现didSelect方法即可实现点击cell控制器自动跳转且自动赋值
+
+***
 
 ## 感谢使用，有任何问题欢迎随时issue我
 
