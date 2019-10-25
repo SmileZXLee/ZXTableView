@@ -260,7 +260,11 @@
     }else{
         if(self.zx_setHeaderClassInSection){
             if(self.zx_setHeaderHInSection){
-                return self.zx_setHeaderHInSection(section);
+                if(section < self.zxDatas.count || (self.zx_showHeaderWhenNoMsg &&  section == 0)){
+                    return self.zx_setHeaderHInSection(section);
+                }else{
+                    return CGFLOAT_MIN;
+                }
             }else{
                 if(section < self.zxDatas.count || (self.zx_showHeaderWhenNoMsg &&  section == 0)){
                     UIView *headerView = [self getHeaderViewInSection:section];
@@ -271,7 +275,7 @@
             }
         }else{
             if(self.zx_setHeaderHInSection){
-                return self.zx_setHeaderHInSection(section);
+                return self.zx_showHeaderWhenNoMsg ? self.zx_setHeaderHInSection(section) : CGFLOAT_MIN;
             }else{
                 return CGFLOAT_MIN;
             }
@@ -285,7 +289,11 @@
     }else{
         if(self.zx_setFooterClassInSection){
             if(self.zx_setFooterHInSection){
-                return self.zx_setFooterHInSection(section);
+                if(section < self.zxDatas.count || (self.zx_showFooterWhenNoMsg &&  section == 0)){
+                    return self.zx_setFooterHInSection(section);
+                }else{
+                    return CGFLOAT_MIN;
+                }
             }else{
                 if(section < self.zxDatas.count || (self.zx_showFooterWhenNoMsg &&  section == 0)){
                     UIView *footerView = [self getFooterViewInSection:section];
@@ -297,7 +305,7 @@
             }
         }else{
             if(self.zx_setFooterHInSection){
-                return self.zx_setFooterHInSection(section);
+                return self.zx_showFooterWhenNoMsg ? self.zx_setFooterHInSection(section) : CGFLOAT_MIN;
             }else{
                 return CGFLOAT_MIN;
             }
