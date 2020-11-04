@@ -208,7 +208,12 @@
 }
 #pragma mark tableView cell 将要展示
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    !self.zx_willDisplayCell ? : self.zx_willDisplayCell(indexPath,cell);
+    if([self.zxDelegate respondsToSelector:@selector(tableView:willDisplayCell:forRowAtIndexPath:)]){
+        [self.zxDelegate tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+    }else{
+        !self.zx_willDisplayCell ? : self.zx_willDisplayCell(indexPath,cell);
+    }
+    
 }
 #pragma mark tableView HeaderView & FooterView
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -310,6 +315,22 @@
                 return CGFLOAT_MIN;
             }
         }
+    }
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section{
+    if([self.zxDelegate respondsToSelector:@selector(tableView:willDisplayHeaderView:forSection:)]){
+        [self.zxDelegate tableView:tableView willDisplayHeaderView:view forSection:section];
+    }else{
+        !self.zx_willDisplayHeaderView ? : self.zx_willDisplayHeaderView(section,view);
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section{
+    if([self.zxDelegate respondsToSelector:@selector(tableView:willDisplayHeaderView:forSection:)]){
+        [self.zxDelegate tableView:tableView didEndDisplayingHeaderView:view forSection:section];
+    }else{
+        !self.zx_didEndDisplayingHeaderView ? : self.zx_didEndDisplayingHeaderView(section,view);
     }
 }
 
