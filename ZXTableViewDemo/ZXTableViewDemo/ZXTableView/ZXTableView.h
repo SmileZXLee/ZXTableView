@@ -85,6 +85,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void (^zx_willDisplayHeaderView)(NSInteger section,id headerView);
 ///headerView已经展示完毕，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^zx_didEndDisplayingHeaderView)(NSInteger section,id headerView);
+///footerView将要展示，把id改成对应类名即可无需强制转换
+@property (nonatomic, copy) void (^zx_willDisplayFooterView)(NSInteger section,id footerView);
+///footerView已经展示完毕，把id改成对应类名即可无需强制转换
+@property (nonatomic, copy) void (^zx_didEndDisplayingFooterView)(NSInteger section,id footerView);
 ///scrollView滚动事件
 @property (nonatomic, copy) void (^zx_scrollViewDidScroll)(UIScrollView *scrollView);
 ///scrollView缩放事件

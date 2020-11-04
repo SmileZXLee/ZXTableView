@@ -327,10 +327,26 @@
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section{
-    if([self.zxDelegate respondsToSelector:@selector(tableView:willDisplayHeaderView:forSection:)]){
+    if([self.zxDelegate respondsToSelector:@selector(tableView:didEndDisplayingHeaderView:forSection:)]){
         [self.zxDelegate tableView:tableView didEndDisplayingHeaderView:view forSection:section];
     }else{
         !self.zx_didEndDisplayingHeaderView ? : self.zx_didEndDisplayingHeaderView(section,view);
+    }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section{
+    if([self.zxDelegate respondsToSelector:@selector(tableView:willDisplayFooterView:forSection:)]){
+        [self.zxDelegate tableView:tableView willDisplayFooterView:view forSection:section];
+    }else{
+        !self.zx_willDisplayFooterView ? : self.zx_willDisplayFooterView(section,view);
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingFooterView:(UIView *)view forSection:(NSInteger)section{
+    if([self.zxDelegate respondsToSelector:@selector(tableView:didEndDisplayingFooterView:forSection:)]){
+        [self.zxDelegate tableView:tableView didEndDisplayingFooterView:view forSection:section];
+    }else{
+        !self.zx_didEndDisplayingFooterView ? : self.zx_didEndDisplayingFooterView(section,view);
     }
 }
 
