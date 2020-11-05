@@ -173,13 +173,16 @@ self.tableView.zxDatas = dataArr;
 * ZXTableView中的大多数方法都是zx_开头，zx_set开头代表设置tableView，例如：zx_setCellClass...即为设置(声明)cell的类是谁；zx_get开头代表从tableView中获取信息，例如zx_getCellAt...即为获取cell对象，可依据此结合下方说明快速记忆。
 ### cell相关
 #### 声明cell
+* 使用代码方式声明
 ```objective-c
 self.tableView.zx_setCellClassAtIndexPath = ^Class (NSIndexPath *  indexPath) {
     //可以根据indexPath返回不同的cell
     return [MyCell class];
 };
 ```
-#### 获取cell对象，对cell对象进行操作
+* 或在xib中设置`ZXTableView`的`zx_cellClassName`
+
+#### （非必须）获取cell对象，对cell对象进行操作
 ```objective-c
 self.tableView.zx_getCellAtIndexPath = ^(NSIndexPath *indexPath, id cell, id model) {
     //这里的id cell中id可以改成自己当前的cell类名(若只有一种cell)，id model中的id可以改成自己当前模型的类名(若只有一种模型)
@@ -271,13 +274,16 @@ self.height = 50;
 
 ### headerView&footerView相关，此处以headerView为例
 #### 声明headerView
+* 使用代码声明
 ```objective-c
 //声明HeaderView是什么类
 self.tableView.zx_setHeaderClassInSection = ^Class(NSInteger section) {
     return [MyHeaderView class];
 };
 ```
-#### 获取headerView对象
+* 或在xib中设置`ZXTableView`的`zx_headerClassName`
+
+#### （非必须）获取headerView对象
 ```objective-c
 //获取HeaderView对象并对其进行处理
 self.tableView.zx_getHeaderViewInSection = ^(NSUInteger section, MyHeaderView *headerView, NSMutableArray *secArr) {
@@ -380,7 +386,15 @@ self.tableView.zx_showFooterWhenNoMsg = YES;
 ```objective-c
 self.tableView.zx_fixCellBlockAfterAutoSetModel = YES;
 ```
-* scrollView相关代理
+* 当选中cell的时候是否自动调用tableView的deselectRowAtIndexPath，默认为YES
+```objective-c
+self.tableView.zx_autoDeselectWhenSelected = NO;
+```
+* 是否将所有cell的SelectionStyle设置为None，默认为NO
+```objective-c
+self.tableView.zx_makeAllCellSelectionStyleNone = YES;
+```
+##### scrollView相关代理
 ```objective-c
 ///scrollView滚动事件
 @property (nonatomic, copy) void (^zx_scrollViewDidScroll)(UIScrollView *scrollView);
@@ -393,7 +407,7 @@ self.tableView.zx_fixCellBlockAfterAutoSetModel = YES;
 ///scrollView开始拖拽事件
 @property (nonatomic, copy) void (^zx_scrollViewDidEndDragging)(UIScrollView *scrollView, BOOL willDecelerate);
 ```
-* tableView重写数据源与代理
+##### tableView重写数据源与代理
 ```objective-c
 //tableView的DataSource 设置为当前控制器即可重写对应数据源方法
 @property (nonatomic, weak, nullable) id <UITableViewDataSource> zxDataSource;
