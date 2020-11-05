@@ -10,6 +10,7 @@
 #import "ZXTableView.h"
 #import "ZXTestMainCell.h"
 
+#import "ZXXibTbVC.h"
 #import "ZXTestSingleTbVC.h"
 #import "ZXTestHFTbVC.h"
 #import "ZXTestCHTbVC.h"
@@ -59,6 +60,11 @@
                 VC = [[ZXCustomTbVC alloc]init];
                 break;
             }
+            case 4:{
+                //从xib中声明cell，headerView，footerView的类名示例
+                VC = [[ZXXibTbVC alloc]init];
+                break;
+            }
             default:
                 break;
         }
@@ -70,7 +76,7 @@
 }
 #pragma mark 设置数据源
 -(NSMutableArray *)getTableViewData{
-    NSArray *dataArr = @[@"单一Cell的TableView",@"多个Section的TableView",@"Cell高度动态改变的TableView",@"自定义TableView"];
+    NSArray *dataArr = @[@"单一Cell的TableView",@"多个Section的TableView",@"Cell高度动态改变的TableView",@"自定义TableView",@"从xib中声明cell，headerView，footerView的TableView",];
     return [dataArr mutableCopy];
 }
 @end

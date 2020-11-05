@@ -25,7 +25,9 @@
 }
 #pragma mark ZXTableView的cell，此设置会应用到全部的ZXTableView的cell中
 -(void)zx_setCell:(UITableViewCell *)cell{
-    
+    if(self.zx_makeAllCellSelectionStyleNone){
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
 }
 
 #pragma mark ZXTableView的cell，此设置会应用到全部的ZXTableView的cell中
@@ -45,6 +47,10 @@
         if(self.zx_setCellClassAtIndexPath){
             cellClass = self.zx_setCellClassAtIndexPath(indexPath);
             className = NSStringFromClass(cellClass);
+        }else{
+            if(self.zx_cellClassName.length){
+                className = self.zx_cellClassName;
+            }
         }
         BOOL isExist = [self hasNib:className];
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:className];
@@ -215,6 +221,15 @@
     }
     
 }
+#pragma mark tableView cell 已经展示
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath{
+    if([self.zxDelegate respondsToSelector:@selector(tableView:didEndDisplayingCell:forRowAtIndexPath:)]){
+        [self.zxDelegate tableView:tableView didEndDisplayingCell:cell forRowAtIndexPath:indexPath];
+    }else{
+        !self.zx_didEndDisplayingCell ? : self.zx_didEndDisplayingCell(indexPath,cell);
+    }
+    
+}
 #pragma mark tableView HeaderView & FooterView
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *headerView = nil;
@@ -222,7 +237,7 @@
         headerView = [self.zxDelegate tableView:tableView viewForHeaderInSection:section];
         
     }else{
-        if(self.zx_setHeaderClassInSection){
+        if(self.zx_setHeaderClassInSection || self.zx_headerClassName.length){
             headerView = [self getHeaderViewInSection:section];
             
         }else{
@@ -243,7 +258,7 @@
         footerView = [self.zxDelegate tableView:tableView viewForFooterInSection:section];
         
     }else{
-        if(self.zx_setFooterClassInSection){
+        if(self.zx_setFooterClassInSection || self.zx_footerClassName.length){
             footerView = [self getFooterViewInSection:section];
             
         }else{
@@ -263,7 +278,7 @@
         return [self.zxDelegate tableView:tableView heightForHeaderInSection:section];
         
     }else{
-        if(self.zx_setHeaderClassInSection){
+        if(self.zx_setHeaderClassInSection || self.zx_headerClassName.length){
             if(self.zx_setHeaderHInSection){
                 if(section < self.zxDatas.count || (self.zx_showHeaderWhenNoMsg &&  section == 0)){
                     return self.zx_setHeaderHInSection(section);
@@ -273,7 +288,7 @@
             }else{
                 if(section < self.zxDatas.count || (self.zx_showHeaderWhenNoMsg &&  section == 0)){
                     UIView *headerView = [self getHeaderViewInSection:section];
-                    return headerView.frame.size.height;
+                    return headerView ? headerView.frame.size.height : CGFLOAT_MIN;
                 }else{
                     return CGFLOAT_MIN;
                 }
@@ -292,7 +307,7 @@
         return [self.zxDelegate tableView:tableView heightForFooterInSection:section];
         
     }else{
-        if(self.zx_setFooterClassInSection){
+        if(self.zx_setFooterClassInSection || self.zx_footerClassName.length){
             if(self.zx_setFooterHInSection){
                 if(section < self.zxDatas.count || (self.zx_showFooterWhenNoMsg &&  section == 0)){
                     return self.zx_setFooterHInSection(section);
@@ -483,7 +498,10 @@
     if(self.zx_keepStaticHeaderView && [self.zx_headerViewCacheDic.allKeys containsObject:sectionStr]){
         return self.zx_headerViewCacheDic[sectionStr];
     }
-    Class headerClass = self.zx_setHeaderClassInSection(section);
+    Class headerClass = [self getHeaderClassInSection:section];
+    if(!headerClass){
+        return nil;
+    }
     BOOL isExist = [self hasNib:NSStringFromClass(headerClass)];
     UIView *headerView = nil;
     if(isExist){
@@ -491,10 +509,21 @@
     }else{
         headerView = [[headerClass alloc]init];
     }
-    if(self.zx_keepStaticHeaderView){
+    if(self.zx_keepStaticHeaderView && headerView){
         [self.zx_headerViewCacheDic setObject:headerView forKey:sectionStr];
     }
     return headerView;
+}
+
+#pragma mark 根据section获取headerView的class
+- (Class)getHeaderClassInSection:(NSUInteger)section{
+    if(self.zx_setHeaderClassInSection){
+        return self.zx_setHeaderClassInSection(section);
+    }
+    if(self.zx_headerClassName.length){
+        return NSClassFromString(self.zx_headerClassName);
+    }
+    return nil;
 }
 
 #pragma mark 根据section获取footerView
@@ -503,7 +532,10 @@
     if(self.zx_keepStaticFooterView && [self.zx_footerViewCacheDic.allKeys containsObject:sectionStr]){
         return self.zx_footerViewCacheDic[sectionStr];
     }
-    Class footerClass = self.zx_setFooterClassInSection(section);
+    Class footerClass = [self getFooterClassInSection:section];
+    if(!footerClass){
+        return nil;
+    }
     BOOL isExist = [self hasNib:NSStringFromClass(footerClass)];
     UIView *footerView = nil;
     if(isExist){
@@ -511,10 +543,21 @@
     }else{
         footerView = [[footerClass alloc]init];
     }
-    if(self.zx_keepStaticFooterView){
+    if(self.zx_keepStaticFooterView && footerView){
         [self.zx_footerViewCacheDic setObject:footerView forKey:sectionStr];
     }
     return footerView;
+}
+
+#pragma mark 根据section获取footerView的class
+- (Class)getFooterClassInSection:(NSUInteger)section{
+    if(self.zx_setFooterClassInSection){
+        return self.zx_setFooterClassInSection(section);
+    }
+    if(self.zx_footerClassName.length){
+        return NSClassFromString(self.zx_footerClassName);
+    }
+    return nil;
 }
 
 #pragma mark 获取当前tableView所在的导航控制器

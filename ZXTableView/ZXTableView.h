@@ -16,7 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 数据设置
 ///设置所有数据数组
 @property(nonatomic, strong)NSMutableArray *zxDatas;
-///声明cell的类
+///设置所有cell的类名
+@property (nullable, nonatomic, copy) IBInspectable NSString *zx_cellClassName;
+///设置cell的类，若设置了，则zx_cellClassName无效
 @property (nonatomic, copy) Class (^zx_setCellClassAtIndexPath)(NSIndexPath *indexPath);
 ///设置cell的高度(非必须，若设置了，则内部的自动计算高度无效)
 @property (nonatomic, copy) CGFloat (^zx_setCellHAtIndexPath)(NSIndexPath *indexPath);
@@ -24,9 +26,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) CGFloat (^zx_setNumberOfSectionsInTableView)(UITableView *tableView);
 ///设置对应section中row的数量(非必须，若设置了，则内部自动设置对应section中row的数量无效)
 @property (nonatomic, copy) CGFloat (^zx_setNumberOfRowsInSection)(NSUInteger section);
-///根据HeaderView类名设置HeaderView，写了此方法则zx_setHeaderViewInSection无效，无需实现zx_setHeaderHInSection，自动计算高度
+///设置所有headerView的类名
+@property (nullable, nonatomic, copy) IBInspectable NSString *zx_headerClassName;
+///根据HeaderView类名设置HeaderView，写了此方法则zx_setHeaderViewInSection无效，无需实现zx_setHeaderHInSection，自动计算高度，若设置了，则zx_headerClassName无效
 @property (nonatomic, copy) Class (^zx_setHeaderClassInSection)(NSInteger section);
-///根据FooterView类名设置FooterView，写了此方法则zx_setFooterViewInSection无效，无需实现zx_setFooterHInSection，自动计算高度
+///设置所有footerView的类名
+@property (nullable, nonatomic, copy) IBInspectable NSString *zx_footerClassName;
+///根据FooterView类名设置FooterView，写了此方法则zx_setFooterViewInSection无效，无需实现zx_setFooterHInSection，自动计算高度，若设置了，则zx_footerClassName无效
 @property (nonatomic, copy) Class (^zx_setFooterClassInSection)(NSInteger section);
 ///设置HeaderView，必须实现zx_setHeaderHInSection
 @property (nonatomic, copy) UIView *(^zx_setHeaderViewInSection)(NSInteger section);
@@ -52,6 +58,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)BOOL zx_fixCellBlockAfterAutoSetModel;
 ///当选中cell的时候是否自动调用tableView的deselectRowAtIndexPath，默认为YES
 @property(nonatomic, assign)BOOL zx_autoDeselectWhenSelected;
+///是否将所有cell的SelectionStyle设置为None
+@property(nonatomic, assign)BOOL zx_makeAllCellSelectionStyleNone;
 #pragma mark - 数据获取
 ///获取对应行的cell，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^zx_getCellAtIndexPath)(NSIndexPath *indexPath,id cell,id model);
@@ -81,6 +89,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSArray<UITableViewRowAction *>* (^zx_editActionsForRowAtIndexPath)(NSIndexPath *indexPath);
 ///cell将要展示，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^zx_willDisplayCell)(NSIndexPath *indexPath,id cell);
+///cell已经展示，把id改成对应类名即可无需强制转换
+@property (nonatomic, copy) void (^zx_didEndDisplayingCell)(NSIndexPath *indexPath,id cell);
 ///headerView将要展示，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^zx_willDisplayHeaderView)(NSInteger section,id headerView);
 ///headerView已经展示完毕，把id改成对应类名即可无需强制转换
@@ -97,7 +107,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void (^zx_scrollViewDidScrollToTop)(UIScrollView *scrollView);
 ///scrollView开始拖拽事件
 @property (nonatomic, copy) void (^zx_scrollViewWillBeginDragging)(UIScrollView *scrollView);
-///scrollView开始拖拽事件
+///scrollView结束拖拽事件
 @property (nonatomic, copy) void (^zx_scrollViewDidEndDragging)(UIScrollView *scrollView, BOOL willDecelerate);
 #pragma mark - UITableViewDataSource & UITableViewDelegate
 ///tableView的DataSource 设置为当前控制器即可重写对应数据源方法

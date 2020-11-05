@@ -75,7 +75,7 @@
 -(void)setTableViewData{
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSMutableArray *dataArr = [NSMutableArray array];
-        for(NSUInteger i = 0;i < 20;i++){
+        for(NSUInteger i = 0;i < 10;i++){
             ZXTestSingleTbModel *model = [[ZXTestSingleTbModel alloc]init];
             model.name = [NSString stringWithFormat:@"小明%lu",i];
             model.goodAt = [NSString stringWithFormat:@"跑步%lu",i];

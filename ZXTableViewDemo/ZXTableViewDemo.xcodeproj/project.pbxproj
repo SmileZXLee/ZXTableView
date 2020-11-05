@@ -43,6 +43,14 @@
 		74EA2E7C224F9D88003F55E3 /* ZXTestHFHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74EA2E7B224F9D88003F55E3 /* ZXTestHFHeaderView.xib */; };
 		74EA2E7F224FC684003F55E3 /* ZXTestHFFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74EA2E7E224FC684003F55E3 /* ZXTestHFFooterView.m */; };
 		74EA2E81224FC690003F55E3 /* ZXTestHFFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74EA2E80224FC690003F55E3 /* ZXTestHFFooterView.xib */; };
+		74FC21E925542342003FBA92 /* ZXXibTbVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FC21E725542342003FBA92 /* ZXXibTbVC.m */; };
+		74FC21EA25542342003FBA92 /* ZXXibTbVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74FC21E825542342003FBA92 /* ZXXibTbVC.xib */; };
+		74FC21F1255423C4003FBA92 /* ZXXibTbCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FC21EF255423C4003FBA92 /* ZXXibTbCell.m */; };
+		74FC21F2255423C4003FBA92 /* ZXXibTbCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74FC21F0255423C4003FBA92 /* ZXXibTbCell.xib */; };
+		74FC21F825542431003FBA92 /* ZXXibTbHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FC21F725542431003FBA92 /* ZXXibTbHeaderView.m */; };
+		74FC21FD25542442003FBA92 /* ZXXibTbHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74FC21FC25542442003FBA92 /* ZXXibTbHeaderView.xib */; };
+		74FC2203255424AD003FBA92 /* ZXXibTbFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FC2202255424AD003FBA92 /* ZXXibTbFooterView.m */; };
+		74FC2208255424CD003FBA92 /* ZXXibTbFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74FC2207255424CD003FBA92 /* ZXXibTbFooterView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +135,18 @@
 		74EA2E7D224FC684003F55E3 /* ZXTestHFFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXTestHFFooterView.h; sourceTree = "<group>"; };
 		74EA2E7E224FC684003F55E3 /* ZXTestHFFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXTestHFFooterView.m; sourceTree = "<group>"; };
 		74EA2E80224FC690003F55E3 /* ZXTestHFFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZXTestHFFooterView.xib; sourceTree = "<group>"; };
+		74FC21E625542342003FBA92 /* ZXXibTbVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXXibTbVC.h; sourceTree = "<group>"; };
+		74FC21E725542342003FBA92 /* ZXXibTbVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXXibTbVC.m; sourceTree = "<group>"; };
+		74FC21E825542342003FBA92 /* ZXXibTbVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZXXibTbVC.xib; sourceTree = "<group>"; };
+		74FC21EE255423C4003FBA92 /* ZXXibTbCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXXibTbCell.h; sourceTree = "<group>"; };
+		74FC21EF255423C4003FBA92 /* ZXXibTbCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXXibTbCell.m; sourceTree = "<group>"; };
+		74FC21F0255423C4003FBA92 /* ZXXibTbCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZXXibTbCell.xib; sourceTree = "<group>"; };
+		74FC21F625542431003FBA92 /* ZXXibTbHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXXibTbHeaderView.h; sourceTree = "<group>"; };
+		74FC21F725542431003FBA92 /* ZXXibTbHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXXibTbHeaderView.m; sourceTree = "<group>"; };
+		74FC21FC25542442003FBA92 /* ZXXibTbHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZXXibTbHeaderView.xib; sourceTree = "<group>"; };
+		74FC2201255424AD003FBA92 /* ZXXibTbFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXXibTbFooterView.h; sourceTree = "<group>"; };
+		74FC2202255424AD003FBA92 /* ZXXibTbFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXXibTbFooterView.m; sourceTree = "<group>"; };
+		74FC2207255424CD003FBA92 /* ZXXibTbFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZXXibTbFooterView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +265,7 @@
 				74EA2E70224F944E003F55E3 /* ZXTestHFTb(多Section) */,
 				7416AFC5224FCC8900BC8914 /* ZXTestCHTb(动态高度) */,
 				748F9CD82354376300190591 /* ZXCustomTb(自定义TableView) */,
+				74FC21E3255422EF003FBA92 /* ZXXibTb(从xib中设置) */,
 				74530C28224FE6C800B7ED7B /* JPFPSStatus */,
 				74A29F2D224F52E500B00511 /* AppDelegate.h */,
 				74A29F2E224F52E500B00511 /* AppDelegate.m */,
@@ -392,6 +413,41 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		74FC21E3255422EF003FBA92 /* ZXXibTb(从xib中设置) */ = {
+			isa = PBXGroup;
+			children = (
+				74FC21E4255422EF003FBA92 /* Model */,
+				74FC21E5255422EF003FBA92 /* View */,
+				74FC21E625542342003FBA92 /* ZXXibTbVC.h */,
+				74FC21E725542342003FBA92 /* ZXXibTbVC.m */,
+				74FC21E825542342003FBA92 /* ZXXibTbVC.xib */,
+			);
+			path = "ZXXibTb(从xib中设置)";
+			sourceTree = "<group>";
+		};
+		74FC21E4255422EF003FBA92 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		74FC21E5255422EF003FBA92 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				74FC21EE255423C4003FBA92 /* ZXXibTbCell.h */,
+				74FC21EF255423C4003FBA92 /* ZXXibTbCell.m */,
+				74FC21F0255423C4003FBA92 /* ZXXibTbCell.xib */,
+				74FC21F625542431003FBA92 /* ZXXibTbHeaderView.h */,
+				74FC21F725542431003FBA92 /* ZXXibTbHeaderView.m */,
+				74FC21FC25542442003FBA92 /* ZXXibTbHeaderView.xib */,
+				74FC2201255424AD003FBA92 /* ZXXibTbFooterView.h */,
+				74FC2202255424AD003FBA92 /* ZXXibTbFooterView.m */,
+				74FC2207255424CD003FBA92 /* ZXXibTbFooterView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -504,12 +560,16 @@
 				74EA2E5F224F7B34003F55E3 /* ZXTestMainCell.xib in Resources */,
 				74EA2E7C224F9D88003F55E3 /* ZXTestHFHeaderView.xib in Resources */,
 				74EA2E58224F79EA003F55E3 /* ZXTestMainVC.xib in Resources */,
+				74FC21EA25542342003FBA92 /* ZXXibTbVC.xib in Resources */,
 				7416AFD1224FCF9500BC8914 /* ZXTestCHTbCell.xib in Resources */,
 				74EA2E81224FC690003F55E3 /* ZXTestHFFooterView.xib in Resources */,
 				74A29F37224F52E500B00511 /* Assets.xcassets in Resources */,
 				748F9CDE235437C700190591 /* ZXCustomTbVC.xib in Resources */,
+				74FC2208255424CD003FBA92 /* ZXXibTbFooterView.xib in Resources */,
+				74FC21FD25542442003FBA92 /* ZXXibTbHeaderView.xib in Resources */,
 				74EA2E6C224F8BB3003F55E3 /* ZXTestSingleTbCell.xib in Resources */,
 				74EA2E77224F9468003F55E3 /* ZXTestHFTbVC.xib in Resources */,
+				74FC21F2255423C4003FBA92 /* ZXXibTbCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,10 +594,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74FC21E925542342003FBA92 /* ZXXibTbVC.m in Sources */,
 				74EA2E76224F9468003F55E3 /* ZXTestHFTbVC.m in Sources */,
 				74EA2E57224F79EA003F55E3 /* ZXTestMainVC.m in Sources */,
 				74530C27224FD75100B7ED7B /* ZXTestCHTbSpaceHeader.m in Sources */,
 				7416AFCB224FCCCE00BC8914 /* ZXTestCHTbVC.m in Sources */,
+				74FC2203255424AD003FBA92 /* ZXXibTbFooterView.m in Sources */,
 				74EA2E66224F89D9003F55E3 /* ZXTestSingleTbVC.m in Sources */,
 				74530C2B224FE6C800B7ED7B /* JPFPSStatus.m in Sources */,
 				74EA2E51224F60CE003F55E3 /* NSObject+ZXTbAddPro.m in Sources */,
@@ -552,6 +614,8 @@
 				74EA2E4E224F5C4C003F55E3 /* ZXTbGetProName.m in Sources */,
 				74EA2E6B224F8BB3003F55E3 /* ZXTestSingleTbCell.m in Sources */,
 				74EA2E4B224F5695003F55E3 /* NSObject+ZXTbSafeValue.m in Sources */,
+				74FC21F825542431003FBA92 /* ZXXibTbHeaderView.m in Sources */,
+				74FC21F1255423C4003FBA92 /* ZXXibTbCell.m in Sources */,
 				74A29F2F224F52E500B00511 /* AppDelegate.m in Sources */,
 				7416AFD0224FCF9500BC8914 /* ZXTestCHTbCell.m in Sources */,
 				74B68675235E1C5B00804DB9 /* UIView+ZXTbGetResponder.m in Sources */,
