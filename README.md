@@ -15,6 +15,18 @@ pod 'ZXTableView'
 ```objective-c
 #import "ZXTableView.h"
 ```
+
+***
+## 功能&特点
+- [x] 无需设置数据源和代理，创建一个简单的tableView仅需在控制器中声明cell，headerView(非必须)，footerView(非必须)的类，然后将数据数组赋值给`zxDatas`，`zxDatas`为二级数组即为多section的情况，然后在cell中创建model(以“model”字符串结尾)，然后重写setModel即可。
+- [x] 支持在xib的tableView中设置cell，headerView(非必须)，footerView(非必须)的类名，控制器中仅需将数据数组赋值给`zxDatas`，后续步骤与上一条相同。
+- [x] 超丰富的tableView属性设置，支持根据具体的indexPath设置特定cell，根据具体的section设置特定的headerView和footerView，支持自动高度及自定义高度。
+- [x] 支持在cell中直接获取当前indexPath，直接获取当前tableView，支持在model中直接获取当前indexPath，支持在headerView和footerView中获取当前section等。
+- [x] 支持tableView的cell点击事件回调，滑动编辑事件回调，滚动事件回调等所有常见代理回调，支持自定义代理。
+- [x] 支持自定义系统tableView的所有代理和数据源设置(一般不需要)。
+
+*** 
+
 ## 创建ZXTableView示例
 ### 创建一个最基础的TableView，实现点击删除按钮删除对应行
 * 在TableView所在的控制器中，此处定义的cell对应模型为ZXTestSingleTbModel
