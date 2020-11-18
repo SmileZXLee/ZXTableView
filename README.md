@@ -15,6 +15,18 @@ pod 'ZXTableView'
 ```objective-c
 #import "ZXTableView.h"
 ```
+
+***
+## 功能&特点
+- [x] 无需设置数据源和代理，创建一个简单的tableView仅需在控制器中声明cell，headerView(非必须)，footerView(非必须)的类，然后将数据数组赋值给`zxDatas`，`zxDatas`为二级数组即为多section的情况，然后在cell中创建model(以“model”字符串结尾)，然后重写setModel即可。
+- [x] 支持在xib的tableView中设置cell，headerView(非必须)，footerView(非必须)的类名，控制器中仅需将数据数组赋值给`zxDatas`，后续步骤与上一条相同。
+- [x] 超丰富的tableView属性设置，支持根据具体的indexPath设置特定cell，根据具体的section设置特定的headerView和footerView，支持自动高度及自定义高度。
+- [x] 支持在cell中直接获取当前indexPath，直接获取当前tableView，支持在model中直接获取当前indexPath，支持在headerView和footerView中获取当前section等。
+- [x] 支持tableView的cell点击事件回调，滑动编辑事件回调，滚动事件回调等所有常见代理回调，支持自定义代理。
+- [x] 支持自定义系统tableView的所有代理和数据源设置(一般不需要)。
+
+*** 
+
 ## 创建ZXTableView示例
 ### 创建一个最基础的TableView，实现点击删除按钮删除对应行
 * 在TableView所在的控制器中，此处定义的cell对应模型为ZXTestSingleTbModel
@@ -173,13 +185,16 @@ self.tableView.zxDatas = dataArr;
 * ZXTableView中的大多数方法都是zx_开头，zx_set开头代表设置tableView，例如：zx_setCellClass...即为设置(声明)cell的类是谁；zx_get开头代表从tableView中获取信息，例如zx_getCellAt...即为获取cell对象，可依据此结合下方说明快速记忆。
 ### cell相关
 #### 声明cell
+* 使用代码方式声明
 ```objective-c
 self.tableView.zx_setCellClassAtIndexPath = ^Class (NSIndexPath *  indexPath) {
     //可以根据indexPath返回不同的cell
     return [MyCell class];
 };
 ```
-#### 获取cell对象，对cell对象进行操作
+* 或在xib中设置`ZXTableView`的`zx_cellClassName`
+
+#### （非必须）获取cell对象，对cell对象进行操作
 ```objective-c
 self.tableView.zx_getCellAtIndexPath = ^(NSIndexPath *indexPath, id cell, id model) {
     //这里的id cell中id可以改成自己当前的cell类名(若只有一种cell)，id model中的id可以改成自己当前模型的类名(若只有一种模型)
@@ -271,13 +286,16 @@ self.height = 50;
 
 ### headerView&footerView相关，此处以headerView为例
 #### 声明headerView
+* 使用代码声明
 ```objective-c
 //声明HeaderView是什么类
 self.tableView.zx_setHeaderClassInSection = ^Class(NSInteger section) {
     return [MyHeaderView class];
 };
 ```
-#### 获取headerView对象
+* 或在xib中设置`ZXTableView`的`zx_headerClassName`
+
+#### （非必须）获取headerView对象
 ```objective-c
 //获取HeaderView对象并对其进行处理
 self.tableView.zx_getHeaderViewInSection = ^(NSUInteger section, MyHeaderView *headerView, NSMutableArray *secArr) {
@@ -380,7 +398,15 @@ self.tableView.zx_showFooterWhenNoMsg = YES;
 ```objective-c
 self.tableView.zx_fixCellBlockAfterAutoSetModel = YES;
 ```
-* scrollView相关代理
+* 当选中cell的时候是否自动调用tableView的deselectRowAtIndexPath，默认为YES
+```objective-c
+self.tableView.zx_autoDeselectWhenSelected = NO;
+```
+* 是否将所有cell的SelectionStyle设置为None，默认为NO
+```objective-c
+self.tableView.zx_makeAllCellSelectionStyleNone = YES;
+```
+##### scrollView相关代理
 ```objective-c
 ///scrollView滚动事件
 @property (nonatomic, copy) void (^zx_scrollViewDidScroll)(UIScrollView *scrollView);
@@ -393,7 +419,7 @@ self.tableView.zx_fixCellBlockAfterAutoSetModel = YES;
 ///scrollView开始拖拽事件
 @property (nonatomic, copy) void (^zx_scrollViewDidEndDragging)(UIScrollView *scrollView, BOOL willDecelerate);
 ```
-* tableView重写数据源与代理
+##### tableView重写数据源与代理
 ```objective-c
 //tableView的DataSource 设置为当前控制器即可重写对应数据源方法
 @property (nonatomic, weak, nullable) id <UITableViewDataSource> zxDataSource;
