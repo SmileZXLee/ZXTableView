@@ -26,6 +26,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) CGFloat (^zx_setNumberOfSectionsInTableView)(UITableView *tableView);
 ///设置对应section中row的数量(非必须，若设置了，则内部自动设置对应section中row的数量无效)
 @property (nonatomic, copy) CGFloat (^zx_setNumberOfRowsInSection)(NSUInteger section);
+///设置返回每个索引的内容
+@property (nonatomic, copy) NSString * (^zx_setTitleForHeaderInSection)(NSUInteger section);
+///设置返回索引数组
+@property (nonatomic, copy) NSArray<NSString *> * (^zx_setSectionIndexTitlesForTableView)(UITableView *tableView);
+///设置索引对应的section
+@property (nonatomic, copy) NSInteger (^zx_setSectionForSectionIndex)(NSString *title,NSInteger index);
 ///设置所有headerView的类名
 @property (nullable, nonatomic, copy) IBInspectable NSString *zx_headerClassName;
 ///根据HeaderView类名设置HeaderView，写了此方法则zx_setHeaderViewInSection无效，无需实现zx_setHeaderHInSection，自动计算高度，若设置了，则zx_headerClassName无效
@@ -58,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)BOOL zx_fixCellBlockAfterAutoSetModel;
 ///当选中cell的时候是否自动调用tableView的deselectRowAtIndexPath，默认为YES
 @property(nonatomic, assign)BOOL zx_autoDeselectWhenSelected;
-///是否将所有cell的SelectionStyle设置为None
+///是否将所有cell的SelectionStyle设置为None，默认为NO
 @property(nonatomic, assign)BOOL zx_makeAllCellSelectionStyleNone;
 #pragma mark - 数据获取
 ///获取对应行的cell，把id改成对应类名即可无需强制转换

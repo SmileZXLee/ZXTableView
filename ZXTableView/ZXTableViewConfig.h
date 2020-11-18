@@ -17,7 +17,7 @@ static NSString *const DATAMODEL = @"model";
 static NSString *const INDEX = @"indexPath";
 ///headerView与footerView的section属性，存储当前headerView与footerView所属的section
 static NSString *const SECTION = @"section";
-///若ZXBaseTableView无法自动获取cell高度（zxdata有值即可），且用户未自定义高度，则使用默认高度
+///若ZXTableView无法自动获取cell高度（zxdata有值即可），且用户未自定义高度，则使用默认高度
 static CGFloat const CELLDEFAULTH = 44;
 
 #pragma mark - TableView默认偏好配置

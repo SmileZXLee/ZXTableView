@@ -141,6 +141,40 @@
     }
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if([self.zxDataSource respondsToSelector:@selector(tableView:titleForHeaderInSection:)]){
+        return [self.zxDataSource tableView:tableView titleForHeaderInSection:section];
+    }else{
+        if(self.zx_setTitleForHeaderInSection){
+            return self.zx_setTitleForHeaderInSection(section);
+        }
+        return nil;
+    }
+}
+
+- (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView{
+    if([self.zxDataSource respondsToSelector:@selector(sectionIndexTitlesForTableView:)]){
+        return [self.zxDataSource sectionIndexTitlesForTableView:tableView];
+    }else{
+        if(self.zx_setSectionIndexTitlesForTableView){
+            return self.zx_setSectionIndexTitlesForTableView(tableView);
+        }
+        return nil;
+    }
+}
+
+#pragma mark 返回索引对应的section
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index{
+    if([self.zxDataSource respondsToSelector:@selector(tableView:sectionForSectionIndexTitle:atIndex:)]){
+        return [self.zxDataSource tableView:tableView sectionForSectionIndexTitle:title atIndex:index];
+    }else{
+        if(self.zx_setSectionForSectionIndex){
+            return self.zx_setSectionForSectionIndex(title,index);
+        }
+        return 0;
+    }
+}
+
 #pragma mark - UITableViewDelegate
 #pragma mark tableView 选中某一indexPath
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
