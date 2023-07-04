@@ -32,7 +32,9 @@
 
 #pragma mark ZXTableView的cell，此设置会应用到全部的ZXTableView的cell中
 -(void)zx_setTableView{
-    
+    if (@available(iOS 15.0, *)) {
+        self.sectionHeaderTopPadding = 0;
+    }
 }
 
 
